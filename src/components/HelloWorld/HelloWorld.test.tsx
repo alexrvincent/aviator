@@ -13,7 +13,7 @@ describe('<HelloWorld />', () => {
 
     render(<HelloWorld {...props} />);
 
-    expect(screen.getByDisplayValue(props.text)).toBeInTheDocument;
-    expect(screen.getByDisplayValue(props.text).tagName).toBe('PARAGRAPH');
+    expect(screen.getByText(props.text)).toBeInTheDocument;
+    expect(screen.getByText(props.text).tagName).toBe('P');
   });
 });
