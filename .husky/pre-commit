@@ -3,3 +3,6 @@
 
 echo "🔍 Linting staged files ... "
 yarn lint-staged
+
+echo "🧪 Running test suite before committing ... "
+yarn test
