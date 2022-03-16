@@ -1,0 +1,11 @@
+.app {
+  margin: 0 auto;
+  max-width: 1028px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1028px) {
+  .app {
+    max-width: 979px;
+  }
+}

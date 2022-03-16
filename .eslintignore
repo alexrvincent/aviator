@@ -1,0 +1,5 @@
+dist/**
+.eslintrc.js
+.stylelintrc.js
+.prettierrc.js
+jest.config.js

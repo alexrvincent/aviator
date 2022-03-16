@@ -1,0 +1,91 @@
+{
+  "name": "alexrvincent-boilerplate",
+  "version": "1.0.0",
+  "description": "An application to test TypeScript full tooling in a simple React app",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "yarn lint-js && yarn lint-css",
+    "lint-and-fix": "yarn lint-and-fix-js && yarn lint-and-fix-css",
+    "lint-js": "eslint '*/**/*.{js,ts,tsx}' --max-warnings 0",
+    "lint-css": "stylelint './src/**/*.{css,sass,scss}'",
+    "lint-and-fix-js": "eslint '*/**/*.{js,ts,tsx}' --fix --max-warnings 0",
+    "lint-and-fix-css": "stylelint './src/**/*.{css,sass,scss}' --fix",
+    "test": "jest",
+    "test-no-cache": "jest --no-cache",
+    "test-and-watch": "yarn test --watch",
+    "start-client": "webpack serve --config config/webpack.client.dev.js --color",
+    "build-client": "webpack --config config/webpack.client.prod.js --profile --color",
+    "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
+    "compile": "tsc --p tsconfig.json"
+  },
+  "lint-staged": {
+    "*/**/*.{js,ts,tsx}": [
+      "eslint --fix --max-warnings 0"
+    ],
+    "*.{scss,sass,css}": [
+      "stylelint --fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexrvincent/alexrvincent-boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexrvincent/alexrvincent-boilerplate/issues"
+  },
+  "homepage": "https://github.com/alexrvincent/alexrvincent-boilerplate#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "ejs": "^3.1.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-typescript": "^7.13.0",
+    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/react": "^11.2.7",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.6",
+    "@types/react-dom": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "babel-jest": "^27.0.2",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.2.10",
+    "html-webpack-plugin": "^5.3.1",
+    "husky": "^6.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.4",
+    "lint-staged": "^11.0.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "node-sass": "^6.0.0",
+    "prettier": "^2.3.0",
+    "sass-loader": "^11.1.1",
+    "style-loader": "^2.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^3.19.0",
+    "ts-jest": "^27.0.2",
+    "ts-loader": "^9.2.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
+
