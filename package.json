@@ -21,6 +21,7 @@
     "build-client": "webpack --config config/webpack.client.prod.js --profile --color",
     "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
     "generate-component": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
+    "gc": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
     "can-i-check-in": "yarn lint-and-fix && yarn test",
     "can-i-commit": "yarn lint-and-fix && yarn test",
     "compile": "tsc --p tsconfig.json"

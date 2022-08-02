@@ -1,6 +1,9 @@
 var minimist = require('minimist');
 var fs = require('fs');
 // generateComponent()
+// Creates an index.js, .tsx, .test.tsx, and .scss file for a given name with some boilerplate code.
+// Usage: yarn run generate-component --name "MyNewComponent"
+// Usage (shortcut): yarn gc --n "MyNewComponent"
 var generateComponent = function (name) {
   // Attempt to generate the new component folder
   var filePath = './src/components';
