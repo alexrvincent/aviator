@@ -1,6 +1,6 @@
 import React from 'react';
 import './HelloWorld.scss';
-import classNames from '../../util/classNames';
+import classNames from 'util/classNames';
 
 // Use an interface for public API definitions or when authoring a 3rd part api
 // interface Props {
@@ -22,7 +22,7 @@ const HelloWorld: React.FC<Props> = (props) => {
   const { text, onHelloWorldClick } = props;
 
   const cls = classNames({
-    helloWorld: true,
+    HelloWorld: true,
   });
 
   return (

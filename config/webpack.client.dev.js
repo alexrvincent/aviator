@@ -1,3 +1,4 @@
+const path = require('path');
 const paths = require('./paths');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -32,10 +33,20 @@ module.exports = {
         ],
         sideEffects: true,
       },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      Components: path.resolve(__dirname, '../src/components/'),
+      css: path.resolve(__dirname, '../src/css/'),
+      util: path.resolve(__dirname, '../util'),
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -51,5 +62,6 @@ module.exports = {
     host: 'localhost',
     port: 3000,
     publicPath: '/',
+    historyApiFallback: true,
   },
 };

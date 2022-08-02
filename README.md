@@ -16,3 +16,9 @@ Current Tech Stack:
 - Babel
 - Jest
 - Normalize.css
+
+# TO-DO: Fix CSS to use modules (variables, mixins, etc.)
+
+# TO-DO: Split out Components/ that are routes into Routes/ or Pages/
+
+# TO-DO: fix @ts-ignores

@@ -5,8 +5,8 @@
 
 // // I. Typing in Typescript
 
-// // 1. By Inference: helloWorld has an inferred type of a string
-// const helloWorld = 'Hello World';
+// // 1. By Inference: HelloWorld has an inferred type of a string
+// const HelloWorld = 'Hello World';
 
 // // 2. By Explicit Typing
 

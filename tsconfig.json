@@ -44,8 +44,26 @@
 
     /* Module Resolution Options */
     "moduleResolution": "node",                     /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    // "baseUrl": "./",                             /* Base directory to resolve non-absolute module names. */
-    // "paths": {},                                 /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    "baseUrl": "./",                                /* Base directory to resolve non-absolute module names. */
+    "paths": {
+      // "@styles": ["styles/index"],
+      // "@fonts": ["fonts/index"],
+      "Components/*": ["src/components/*"],
+      // "@atoms": ["components/atoms/index"],
+      // "@molecules": ["components/molecules/index"],
+      // "@organisms": ["components/organisms/index"],
+      // "@templates": ["components/templates/index"],
+      // "@icons": ["components/atoms/Icons/index"],
+      // "@config": ["config/index"],
+      // "@utils": ["utils/index"],
+      // "@hooks": ["hooks/index"],
+      // "@constants": ["constants/index"],
+      // "@queries": ["queries/index"],
+      // "@reducers": ["state/store/reducers"],
+      // "@actions": ["state/store/actions"],
+      // "@slices": ["state/slices/"],
+      // "@storybookHelpers": ["../.storybook/helpers"]
+    },                                 /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                              /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": [                                  /* List of folders to include type definitions from. */
       "./node_modules/@types",                            /* npm / yarn installed types */
@@ -70,6 +88,6 @@
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true        /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["src/**/*"],                          /* Specify which paths to include in the compilation */
+  "include": ["src/**/*", "src/util/custom.d.ts", "util/classNames.ts"],  /* Specify which paths to include in the compilation */
   "exclude": ["node_modules", "node_modules/**/*"], /* Specify which paths to exclude in the compilation */
 }

@@ -1,12 +1,12 @@
 module.exports = {
   globals: {
-    "ts-jest": {
+    'ts-jest': {
       // Tell ts-jest about our typescript config.
       // You can specify a path to your tsconfig.json file,
       // but since we're compiling specifically for node here,
       // this works too.
-      tsConfig: {
-        target: "es2019",
+      tsconfig: {
+        target: 'es2019',
       },
     },
   },
@@ -15,8 +15,8 @@ module.exports = {
   // .ts and .tsx files.  You *can* just use babel-jest for both, if
   // you already have babel set up to compile typescript files.
   transform: {
-    "^.+\\.jsx?$": "babel-jest",
-    "^.+\\.tsx?$": "ts-jest",
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.tsx?$': 'ts-jest',
     // If you're using babel for both:
     // "^.+\\.[jt]sx?$": "babel-jest",
   },
@@ -26,12 +26,15 @@ module.exports = {
   // to import these, so this tells jest what to do for these.
   moduleNameMapper: {
     // Resolve .css and similar files to identity-obj-proxy instead.
-    ".+\\.(css|styl|less|sass|scss)$": `identity-obj-proxy`,
+    '.+\\.(css|styl|less|sass|scss)$': `identity-obj-proxy`,
     // Resolve .jpg and similar files to /src/test/fileMock.js
-    ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": `<rootDir>/src/test/fileMock.js`,
+    '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/src/test/fileMock.js`,
+    // Resolve Components/.. pathings to the correct ./src/components.. files
+    'Components/(.*)$': '<rootDir>/src/components/$1',
+    'util/(.*)': '<rootDir>/util/$1',
   },
   // Tells Jest what folders to ignore for tests
   testPathIgnorePatterns: [`node_modules`, `\\.cache`],
   testURL: `http://localhost`,
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
 };
