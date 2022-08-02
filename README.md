@@ -11,7 +11,7 @@ Current Tech Stack:
 - Webpack (Client / Dev Server & Productionized Builds)
 - React Router (DOM)
 - SASS
-- ESLint
+- ESLint (and typescript-eslint)
 - Prettier
 - Stylelint
 - Babel
@@ -24,3 +24,7 @@ Current Tech Stack:
 # TO-DO: fix @ts-ignores
 
 # TO-DO: Add cypress support
+
+# TO-DO: Add circle ci support
+
+# TO-DO: Add heroku support

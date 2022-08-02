@@ -1,3 +1,4 @@
+const path = require('path');
 const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -96,6 +97,10 @@ module.exports = (env) => {
       modules: ['src', 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
+        Components: path.resolve(__dirname, '../src/components/'),
+        css: path.resolve(__dirname, '../src/css/'),
+        util: path.resolve(__dirname, '../util'),
+        Routes: path.resolve(__dirname, '../src/routes/'),
         // Webpack tree-shakes redux out because it's not used explicitly
         // in our main bundle. Redux-toolkit uses it as a dependency, so we'll need
         // to alias it for the production bundle
