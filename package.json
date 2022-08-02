@@ -12,6 +12,7 @@
     "lint-and-fix-js": "eslint '*/**/*.{js,ts,tsx}' --fix --max-warnings 0",
     "lint-and-fix-css": "stylelint './src/**/*.{css,sass,scss}' --fix",
     "test": "jest",
+    "test-coverage": "jest --coverage && echo 'To view coverage report, open coverage/lcov-report/index.html in a web browser'",
     "test-no-cache": "jest --no-cache",
     "test-and-watch": "yarn test --watch",
     "start": "webpack serve --config config/webpack.client.dev.js --color",
@@ -22,6 +23,8 @@
     "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
     "generate-component": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
     "gc": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
+    "generate-route": "tsc ./util/generateRoute.ts && node ./util/generateRoute.js",
+    "gr": "tsc ./util/generateRoute.ts && node ./util/generateRoute.js",
     "can-i-check-in": "yarn lint-and-fix && yarn test",
     "can-i-commit": "yarn lint-and-fix && yarn test",
     "compile": "tsc --p tsconfig.json"
@@ -47,6 +50,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@types/react-router-dom": "^5.3.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0"

@@ -1,18 +1,18 @@
 const minimist = require('minimist');
 const fs = require('fs');
 
-// generateComponent()
+// generateRoute()
 
 // Creates an index.js, .tsx, .test.tsx, and .scss file for a given name with some boilerplate code.
 
-// Usage: yarn run generate-component --name "MyNewComponent"
-// Usage (shortcut): yarn gc --n "MyNewComponent"
-const generateComponent = (name: string) => {
-  // Attempt to generate the new component folder
-  const filePath = './src/components';
+// Usage: yarn run generate-route --name "MyNewRoute"
+// Usage (shortcut): yarn gc --n "MyNewRoute"
+const generateRoute = (name: string) => {
+  // Attempt to generate the new route folder
+  const filePath = './src/routes';
   const newFolderPath = `${filePath}/${name}`;
   if (!fs.existsSync(newFolderPath)) {
-    // A. Generate the component folder
+    // A. Generate the route folder
     fs.mkdirSync(newFolderPath);
 
     // B. Generate the index file in the new folder
@@ -58,7 +58,7 @@ const generateComponent = (name: string) => {
     fs.closeSync(fs.openSync(`${filePath}/${name}/${name}.test.tsx`, 'w'));
     fs.writeFile(
       `${filePath}/${name}/${name}.test.tsx`,
-      `import React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport ${name} from 'Components/${name}';\n\ndescribe('<${name} />', () => {\n\tit('should render the Component normally', () => {\n\t\tconst props = { children: ["${name}"] }\n\t\trender(<${name} {...props} />);\n\t\texpect(screen.getByText("${name}")).toBeInTheDocument;\n\t});\n});\n`,
+      `import React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport ${name} from 'Routes/${name}';\n\ndescribe('<${name} />', () => {\n\tit('should render the Route normally', () => {\n\t\tconst props = { children: ["${name}"] }\n\t\trender(<${name} {...props} />);\n\t\texpect(screen.getByText("${name}")).toBeInTheDocument;\n\t});\n});\n`,
       'utf-8',
       (e) => {
         if (e) {
@@ -67,19 +67,19 @@ const generateComponent = (name: string) => {
       },
     );
 
-    console.log('\x1b[32m', `✔️  Done! Your component '${name}' is now available under src/components/${name}.`);
+    console.log('\x1b[32m', `✔️  Done! Your route '${name}' is now available under src/routes/${name}.`);
 
     // If the folder exists, error out
   } else {
-    console.log('\x1b[31m', `❌ Error: '${name}' is already a generated component. Try a different name!`);
+    console.log('\x1b[31m', `❌ Error: '${name}' is already a generated route. Try a different name!`);
   }
-  console.log('\x1b[37m', 'Finished generating component.');
+  console.log('\x1b[37m', 'Finished generating route.');
 };
 
 // Run the script
 
 // 1. Let the user know this script is attempting to run:
-console.log('🏭 Attempting to build your component ...');
+console.log('🏭 Attempting to build your route ...');
 
 // 2. Specify how you would like to parse the command line arguments
 const minimistOptions = {
@@ -91,10 +91,10 @@ const minimistOptions = {
 // 3. Parse the command line arguments using minimist
 // Note argv._ contains all arguments without options associated with them
 const argv = minimist(process.argv.slice(2), minimistOptions);
-const newComponentName = argv.name;
+const newRouteName = argv.name;
 
-if (newComponentName !== undefined) {
-  generateComponent(newComponentName);
+if (newRouteName !== undefined) {
+  generateRoute(newRouteName);
 } else {
-  console.log('\x1b[31m', "❌ Error: No component name specified. Have you tried using --name 'ComponentName'?");
+  console.log('\x1b[31m', "❌ Error: No route name specified. Have you tried using --name 'RouteName'?");
 }

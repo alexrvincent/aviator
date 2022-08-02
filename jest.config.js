@@ -31,6 +31,7 @@ module.exports = {
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/src/test/fileMock.js`,
     // Resolve Components/.. pathings to the correct ./src/components.. files
     'Components/(.*)$': '<rootDir>/src/components/$1',
+    'Routes/(.*)$': '<rootDir>/src/routes/$1',
     'util/(.*)': '<rootDir>/util/$1',
   },
   // Tells Jest what folders to ignore for tests

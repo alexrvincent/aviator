@@ -9,6 +9,7 @@ Current Tech Stack:
 - React
 - Husky
 - Webpack (Client / Dev Server & Productionized Builds)
+- React Router (DOM)
 - SASS
 - ESLint
 - Prettier
@@ -16,9 +17,10 @@ Current Tech Stack:
 - Babel
 - Jest
 - Normalize.css
-
-# TO-DO: Fix CSS to use modules (variables, mixins, etc.)
-
-# TO-DO: Split out Components/ that are routes into Routes/ or Pages/
+- Manifest best practices (optimized mobile icons)
+- Custom fonts / font-face
+- Developer tooling (Auto-generated components, routes, unit-tests)
 
 # TO-DO: fix @ts-ignores
+
+# TO-DO: Add cypress support

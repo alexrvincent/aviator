@@ -49,6 +49,7 @@
       // "@styles": ["styles/index"],
       // "@fonts": ["fonts/index"],
       "Components/*": ["src/components/*"],
+      "Routes/*": ["src/routes/*"],
       // "@atoms": ["components/atoms/index"],
       // "@molecules": ["components/molecules/index"],
       // "@organisms": ["components/organisms/index"],
