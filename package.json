@@ -1,5 +1,5 @@
 {
-  "name": "alexrvincent-boilerplate",
+  "name": "aviator",
   "version": "1.0.0",
   "description": "An application to test TypeScript full tooling in a simple React app",
   "main": "index.js",
@@ -39,14 +39,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexrvincent/alexrvincent-boilerplate.git"
+    "url": "git+https://github.com/alexrvincent/aviator.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alexrvincent/alexrvincent-boilerplate/issues"
+    "url": "https://github.com/alexrvincent/aviator/issues"
   },
-  "homepage": "https://github.com/alexrvincent/alexrvincent-boilerplate#readme",
+  "homepage": "https://github.com/alexrvincent/aviator#readme",
   "dependencies": {
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
