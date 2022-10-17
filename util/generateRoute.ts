@@ -6,7 +6,7 @@ const fs = require('fs');
 // Creates an index.js, .tsx, .test.tsx, and .scss file for a given name with some boilerplate code.
 
 // Usage: yarn run generate-route --name "MyNewRoute"
-// Usage (shortcut): yarn gc --n "MyNewRoute"
+// Usage (shortcut): yarn gr --n "MyNewRoute"
 const generateRoute = (name: string) => {
   // Attempt to generate the new route folder
   const filePath = './src/routes';
