@@ -1,21 +1,25 @@
+/* 
+  The purpose of this file is to describe to webpack how to build a production-level static application (just html, css and js!) using your local files.
+
+  Everything you see here is parsed, bundled, and exported by webpack. It does *not* run a web server, so the result of this will be files, not a process!
+
+  1. Starting at paths.appIndex.js (aka src/index.js) webpack will traverse the dependencies in an attempt to build all the files in the app. 
+  2. We specify paths.appDist (dist/) as the place we'll put the files we build and give it a name and chunk name to easily identify it.
+  3. Similar to our client.dev.js config, it uses the module rules specified (and their supplied loaders) to figure out how to process a given file type.
+  4. Similar to our client.dev.js it resolves imports using the alias keys (so our Components/MyComponent) mean the same thing to humans and webpack.
+  5. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into public/client-template.html and puts that in dist/index.html
+  6. We also add configuration to HTMLWebpackPlugin to minify all our code and use MiniCssExtractPluin/ForkTsCheckerWebpackPlugin to minify and clean our code.
+  7. Finally we add some optimizations to split our our vendor code (node_modules and external node) from our main app.
+  8. The result of this is some html, css, and js sitting in our dist/ folder ready to be served as a static app!
+
+*/
+
 const path = require('path');
 const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const ejs = require('ejs');
-// const fs = require('fs');
-// const path = require('path');
-
-// function templateContentString(template = paths.appHtmlTemplateInput) {
-//   const file = fs.readFileSync(template, 'utf-8'),
-//     rendered = ejs.render(file, {
-//       reactApp: '<%- reactApp %>',
-//       head: '<%- head %>',
-//     });
-//   return rendered;
-// }
 
 module.exports = (env) => {
   const webpackClientProd = {
@@ -59,7 +63,6 @@ module.exports = (env) => {
         inject: true,
         template: paths.appHtmlTemplateInput,
         filename: paths.appHtmlTemplateOutput,
-        // templateContent: templateContentString(paths.appHtmlTemplateInput),
         minify: {
           removeComments: true,
           collapseWhitespace: true,

@@ -40,6 +40,7 @@ module.exports = {
   appHtml: resolveApp('public/client-template.html'),
   appHtmlTemplateInput: resolveApp('public/client-template.html'),
   appHtmlTemplateOutput: resolveApp('dist/index.html'),
+  appServer: resolveApp('server'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

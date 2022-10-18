@@ -1,3 +1,17 @@
+/* 
+  The purpose of this file is to describe to webpack how to run the client app on a local development server using webpack's dev server.
+
+  Everything you see here is parsed, bundled, loaded and served by webpack exclusively and is for local development only!
+
+  1. Starting at paths.appIndex.js (aka src/index.js) webpack will traverse the dependencies in an attempt to build all the files in the app. 
+  2. It uses the module rules specified (and their supplied loaders) to figure out how to process a given file type.
+  3. It resolves imports using the alias keys (so our Components/MyComponent) mean the same thing to humans and webpack.
+  4. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into public/client-template.html.
+  5. We turn on the "hot" module replacement and add a couple other webpack development server configurations to allow us to have a nice developer experience.
+  6. The webpack development server then serves the app to the host/port we specify for us to develop against! Any changes to the app will reload automatically!
+
+*/
+
 const path = require('path');
 const paths = require('./paths');
 const webpack = require('webpack');
