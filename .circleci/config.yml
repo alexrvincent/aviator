@@ -10,9 +10,13 @@ jobs:
       - run:
           name: Set Config Level
           command: yarn config set loglevel warn --global
+      - run: 
+          name: Install Dependencies
+          command: yarn install
       - run:
           name: Build Application
           command: yarn run dockerfile
       - run:
           name: Run Application
           command: yarn run start
+ 
