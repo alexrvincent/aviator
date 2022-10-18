@@ -1,9 +1,18 @@
 version: 2.1
 
-orbs:
-  heroku: circleci/heroku@1.2.6
-
-workflows:
-  heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
+jobs:
+  build:
+    working_directory: /aviator
+    docker:
+      - image: node:16.8.0-alpine
+    steps:
+      - checkout
+      - run:
+          name: Set Config Level
+          command: yarn config set loglevel warn --global
+      - run:
+          name: Build Application
+          command: yarn run dockerfile
+      - run:
+          name: Run Application
+          command: yarn run start
