@@ -37,7 +37,7 @@
 
     "--SERVER--": "",
     "dev-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --watch --progress --color --config config/webpack.server.dev.js' 'just-wait -t 300 --pattern \"dist/static\" && nodemon dist/server' ",
-    "build-server": "yarn build-client & webpack -p --display-error-details --color --config config/webpack.prod.dev.js'",
+    "build-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --color --config config/webpack.server.prod.js'",
     "run-server": "node dist/server.js",
 
 
