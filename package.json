@@ -43,7 +43,7 @@
 
     "--UTIL--": "",
     "clean": "rm -rf ./dist",
-    "clean-and-install": "yarn clean && yarn install",
+    "clean-and-install": "yarn clean && yarn install --production=false",
     "gc": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
     "gr": "tsc ./util/generateRoute.ts && node ./util/generateRoute.js"
 
