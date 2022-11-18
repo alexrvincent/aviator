@@ -4,50 +4,37 @@
   "description": "An application to test TypeScript full tooling in a simple React app",
   "main": "index.js",
   "scripts": {
-
-
     "--CI--": "",
     "prepare": "husky install",
-    "can-i-check-in": "yarn lint-and-fix && yarn test",
-    "can-i-commit": "yarn lint-and-fix && yarn test",
+    "can-i-commit": "yarn lint-and-fix && yarn checkdeps",
     "compile": "tsc --p tsconfig.json",
-
-
     "--LINTING--": "",
+    "checkdeps": "yarn depcheck",
     "lint": "yarn lint-js && yarn lint-css",
     "lint-and-fix": "yarn lint-and-fix-js && yarn lint-and-fix-css",
     "lint-js": "eslint '*/**/*.{js,ts,tsx}' --max-warnings 0",
     "lint-css": "stylelint './src/**/*.{css,sass,scss}'",
     "lint-and-fix-js": "eslint '*/**/*.{js,ts,tsx}' --fix --max-warnings 0",
     "lint-and-fix-css": "stylelint './src/**/*.{css,sass,scss}' --fix",
-
-
     "--TESTING--": "",
     "test": "jest",
     "test-coverage": "jest --coverage && echo 'To view coverage report, open coverage/lcov-report/index.html in a web browser'",
     "test-no-cache": "jest --no-cache",
     "test-and-watch": "yarn test --watch",
-
-
     "--CLIENT--": "",
     "dev-client": "yarn clean-and-install && webpack serve --config config/webpack.client.dev.js --color --host 0.0.0.0",
     "build-client": "webpack --config config/webpack.client.prod.js --profile --color",
     "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
-
-
     "--SERVER--": "",
     "dev-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --watch --progress --color --config config/webpack.server.dev.js' 'just-wait -t 300 --pattern \"dist/static\" && nodemon dist/server' ",
     "build-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --color --config config/webpack.server.prod.js'",
     "dockerfile": "concurrently --raw 'yarn lint-css' 'yarn lint-js' 'yarn test' && yarn build-server",
     "start": "node dist/server.js",
-
-
     "--UTIL--": "",
     "clean": "rm -rf ./dist",
     "clean-and-install": "yarn clean && yarn install --production=false",
-    "gc": "tsc ./util/generateComponent.ts && node ./util/generateComponent.js",
-    "gr": "tsc ./util/generateRoute.ts && node ./util/generateRoute.js"
-
+    "gc": "node ./util/generateComponent.js",
+    "gr": "node ./util/generateRoute.js"
   },
   "lint-staged": {
     "*/**/*.{js,ts,tsx}": [
@@ -72,15 +59,12 @@
     "@babel/preset-react": "^7.13.13",
     "@types/react-router-dom": "^5.3.3",
     "concurrently": "^7.4.0",
-    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "just-wait": "^1.0.11",
     "nodemon": "^2.0.20",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.3.0",
-    "ts-node": "^10.9.1",
-    "webpack-node-externals": "^3.0.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
@@ -98,6 +82,7 @@
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
+    "depcheck": "^1.4.3",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -111,6 +96,7 @@
     "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^1.6.0",
+    "minimist": "^1.2.7",
     "node-sass": "^6.0.0",
     "prettier": "^2.3.0",
     "sass-loader": "^11.1.1",
@@ -125,7 +111,7 @@
     "typescript": "^4.2.4",
     "webpack": "^5.37.0",
     "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-cli": "^4.7.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }

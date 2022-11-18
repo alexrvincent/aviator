@@ -25,7 +25,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '../', 'dist'),
     filename: 'server.js',
-    publicPath: '/',
+    // publicPath: '/',
   },
   module: {
     rules: [

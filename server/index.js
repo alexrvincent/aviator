@@ -6,9 +6,13 @@
 */
 
 import path from 'path';
-
 import fs from 'fs';
-const express = __non_webpack_require__('express');
+import express from 'express';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+import App from '../src/app';
+
 const app = express();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
@@ -16,10 +20,6 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const STATIC_DIR = path.join(__dirname, 'dist', 'static');
 const DEFAULT_TEMPLATE = path.join(__dirname, 'server', 'templates', 'default.html');
 const PUBLIC_DIR = path.join(__dirname, 'server', 'public');
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
-import App from '../src/app';
 
 /* Step 1: Define all the routes our express server should be able to resolve */
 const routes = {

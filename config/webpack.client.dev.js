@@ -14,7 +14,6 @@
 
 const path = require('path');
 const paths = require('./paths');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -64,19 +63,20 @@ module.exports = {
     },
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appClientHtml,
     }),
   ],
   devServer: {
-    contentBase: paths.appClientPublic,
+    static: paths.appClientPublic,
     compress: true,
     hot: true,
     host: 'localhost',
     port: 3000,
-    publicPath: '/',
+    devMiddleware: {
+      publicPath: '/',
+    },
     historyApiFallback: true,
   },
 };

@@ -1,0 +1,26 @@
+{
+  "ignores": [
+    "just-wait",
+    "@babel/cli",
+    "@babel/preset-typescript",
+    "@svgr/webpack",
+    "@testing-library/jest-dom",
+    "@types/react-dom",
+    "babel-loader",
+    "css-loader",
+    "eslint-plugin-react-hooks",
+    "identity-obj-proxy",
+    "isomorphic-style-loader",
+    "node-sass",
+    "sass-loader",
+    "style-loader",
+    "stylelint-config-prettier",
+    "stylelint-config-standard",
+    "stylelint-prettier",
+    "stylelint-scss",
+    "ts-loader",
+    "webpack-cli",
+    "webpack-dev-server"
+  ],
+  "skip-missing": true
+}
