@@ -1,17 +1,21 @@
 /* 
   The purpose of this file is to describe to node how to run an express server rendering the results of a react app locally.
 
-  Everything you see here is parsed, served by node/express exclusively and is for local development only!
+  Everything you see here is parsed, served by node/express exclusively and is for local development only! Run yarn build-server to get a production server.js file
 
 */
 
 import path from 'path';
+
+import fs from 'fs';
 const express = __non_webpack_require__('express');
 const app = express();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
 const DIST_DIR = path.join(__dirname, 'dist');
 const STATIC_DIR = path.join(__dirname, 'dist', 'static');
+const DEFAULT_TEMPLATE = path.join(__dirname, 'server', 'templates', 'default.html');
+const PUBLIC_DIR = path.join(__dirname, 'server', 'public');
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
@@ -26,7 +30,7 @@ const routes = {
 /* Step 2: Define any static files we want express to serve from its local directory */
 app.use(express.static(DIST_DIR));
 app.use(express.static(STATIC_DIR));
-// app.use(express.static(PUBLIC_DIR))
+app.use(express.static(PUBLIC_DIR));
 
 // app.set('views', path.join(__dirname, 'public'));
 // app.set('view engine', 'html');
@@ -58,23 +62,16 @@ app.get(routes.default, (req, res) => {
       </StaticRouter>,
     );
 
-    let html = `
-      <!DOCTYPE html>
-      <html lang="en">
+    // Select the correct template, in this cause default
+    let template = fs.readFileSync(DEFAULT_TEMPLATE, 'utf8');
 
-        <head>
-          <meta charset="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>aviator-server</title>
+    // TO-DO: Have a more intelligent template selector based on express url routing rules
 
-        <body>
-          <div id="root">${reactApp}</div>
-        </body>
+    // Inject the server-rendered React app into the template
+    let hydratedApp = template.replace(/%aviator%/, reactApp);
 
-      </html>
-    `;
-
-    return res.send(html);
+    // And send it to the client
+    return res.send(hydratedApp);
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message, e.stack);

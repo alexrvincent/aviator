@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+// const { resolve } = require('path');
 const path = require('path');
 
 const appDirectory = fs.realpathSync(process.cwd());
@@ -36,10 +37,14 @@ module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
   appDist: resolveApp('dist'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/client-template.html'),
-  appHtmlTemplateInput: resolveApp('public/client-template.html'),
-  appHtmlTemplateOutput: resolveApp('dist/index.html'),
+  appDistStatic: resolveApp('dist/static'),
+  appClientPublic: resolveApp('client/public'),
+  appServerPublic: resolveApp('server/public'),
+  appClientHtml: resolveApp('client/templates/default.html'),
+  appServerHtml: resolveApp('server/templates/default.html'),
+  appClientHtmlTemplateInput: resolveApp('client/templates/default.html'),
+  appServerHtmlTemplateInput: resolveApp('server/templates/default.html'),
+  appClientHtmlTemplateOutput: resolveApp('dist/index.html'),
   appServer: resolveApp('server'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),

@@ -1,12 +1,12 @@
 /* 
   The purpose of this file is to describe to webpack how to build a development version of your application that runs on a node server using express. 
 
-  Everything you see here is parsed, bundled, and exported by webpack, but is served using an express.js server using parameters we specify. The result of this is to build *and* run a web server.
+  Everything you see here is parsed, bundled, and exported by webpack, but is served using an express.js server using parameters we specify. The result of this is to build *and* run a development web server.
 
   1. Starting at paths.appServer (server/index.js) webpack will traverse the dependencies in an attempt to build all the files in the app. 
   2. It uses the module rules specified (and their supplied loaders) to figure out how to process a given file type.
   3. It resolves imports using the alias keys (so our Components/MyComponent) mean the same thing to humans and webpack.
-  4. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into public/client-template.html.
+  4. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into server/public/templates/default.html.
   5. Finally, it creates dist/server.js and runs / watches any changes made to that file, reloading if there are any.
   6. dist/server.js will translate http requests to a fully rendered react apps on the server. It uses the code built in steps 1-4 to do this! See server/index.js for more.
 

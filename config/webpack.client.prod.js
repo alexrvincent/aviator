@@ -7,7 +7,7 @@
   2. We specify paths.appDist (dist/) as the place we'll put the files we build and give it a name and chunk name to easily identify it.
   3. Similar to our client.dev.js config, it uses the module rules specified (and their supplied loaders) to figure out how to process a given file type.
   4. Similar to our client.dev.js it resolves imports using the alias keys (so our Components/MyComponent) mean the same thing to humans and webpack.
-  5. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into public/client-template.html and puts that in dist/index.html
+  5. Then when it's finished resolving all the files, it uses HTMLWebpackPlugin and injects the fully formed app into client/public/templates/default.html and puts that in dist/index.html
   6. We also add configuration to HTMLWebpackPlugin to minify all our code and use MiniCssExtractPluin/ForkTsCheckerWebpackPlugin to minify and clean our code.
   7. Finally we add some optimizations to split our our vendor code (node_modules and external node) from our main app.
   8. The result of this is some html, css, and js sitting in our dist/ folder ready to be served as a static app!
@@ -61,8 +61,8 @@ module.exports = (env) => {
     plugins: [
       new HtmlWebpackPlugin({
         inject: true,
-        template: paths.appHtmlTemplateInput,
-        filename: paths.appHtmlTemplateOutput,
+        template: paths.appClientHtmlTemplateInput,
+        filename: paths.appClientHtmlTemplateOutput,
         minify: {
           removeComments: true,
           collapseWhitespace: true,
