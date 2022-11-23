@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 // 1. Import New Routes Here
 import HelloRoute from 'Routes/HelloRoute';
 

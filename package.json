@@ -7,6 +7,7 @@
     "--CI--": "",
     "prepare": "husky install",
     "can-i-commit": "yarn lint-and-fix && yarn checkdeps",
+    "can-i-push": "yarn test",
     "compile": "tsc --p tsconfig.json",
     "--LINTING--": "",
     "checkdeps": "yarn depcheck",

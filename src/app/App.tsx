@@ -18,8 +18,8 @@ const App: React.FC = () => {
 
   return (
     <div className={s.app}>
-      {/* @ts-ignore */}
       <NavBar />
+      {/* @ts-ignore */}
       {/* Add top level app integrations here (Redux, Router, Context, Internationalization), etc */}
       {/* <Provider store={store}> */}
       <Routes />
