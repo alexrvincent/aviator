@@ -19,13 +19,13 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   target: 'node',
-  cache: true,
+  cache: false,
   devtool: 'eval-source-map',
   entry: paths.appServer,
   output: {
     path: path.join(__dirname, '../', 'dist'),
     filename: 'server.js',
-    // publicPath: '/',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -44,11 +44,9 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          {
-            // We use isomorphic-style-loader to run on node.js because style-loader requires 'document' a browser exclusive item
-            // Creates `style` nodes from JS strings
-            loader: 'isomorphic-style-loader',
-          },
+          // We use isomorphic-style-loader to run on node.js because style-loader requires 'document' a browser exclusive item
+          // Creates `style` nodes from JS strings
+          'isomorphic-style-loader',
           {
             // Translates CSS into CommonJS
             loader: 'css-loader',
@@ -67,7 +65,6 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
         use: ['@svgr/webpack'],
       },
     ],

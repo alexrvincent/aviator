@@ -22,7 +22,7 @@
     "test-no-cache": "jest --no-cache",
     "test-and-watch": "yarn test --watch",
     "--CLIENT--": "",
-    "dev-client": "yarn clean-and-install && webpack serve --config config/webpack.client.dev.js --color --host 0.0.0.0",
+    "dev-client": "yarn install && webpack serve --config config/webpack.client.dev.js --color --host 0.0.0.0",
     "build-client": "webpack --config config/webpack.client.prod.js --profile --color",
     "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
     "--SERVER--": "",
@@ -37,7 +37,10 @@
     "gr": "node ./util/generateRoute.js"
   },
   "lint-staged": {
-    "*/**/*.{js,ts,tsx}": [
+    "src/**/*.{js,ts,tsx}": [
+      "eslint --fix --max-warnings 0"
+    ],
+    "server/**/*.{js,ts,tsx}": [
       "eslint --fix --max-warnings 0"
     ],
     "*.{scss,sass,css}": [

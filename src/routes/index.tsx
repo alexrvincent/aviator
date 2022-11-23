@@ -8,7 +8,7 @@ import HelloRoute from 'Routes/HelloRoute';
 const Router: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<HelloRoute />} />
+      <Route path="" element={<HelloRoute />} />
       {/* 2. Add New Routes Here */}
       {/* <Route path="/another-route" element={<AnotherRoute/>} /> */}
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}

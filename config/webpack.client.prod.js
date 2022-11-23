@@ -23,6 +23,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = (env) => {
   const webpackClientProd = {
+    target: 'web',
     mode: 'production',
     devtool: 'source-map',
     entry: paths.appIndexJs,
@@ -48,6 +49,7 @@ module.exports = (env) => {
         {
           test: /\.s[ac]ss$/,
           use: [
+            'isomorphic-style-loader',
             {
               loader: MiniCssExtractPlugin.loader,
             },
@@ -56,9 +58,17 @@ module.exports = (env) => {
           ],
           sideEffects: true,
         },
+        {
+          test: /\.svg$/i,
+          use: ['@svgr/webpack'],
+        },
       ],
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'static/css/[name].[contenthash:8].css',
+        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+      }),
       new HtmlWebpackPlugin({
         inject: true,
         template: paths.appClientHtmlTemplateInput,
@@ -75,10 +85,6 @@ module.exports = (env) => {
           minifyCSS: true,
           minifyURLs: true,
         },
-      }),
-      new MiniCssExtractPlugin({
-        filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
       }),
       new ForkTsCheckerWebpackPlugin(),
     ],
