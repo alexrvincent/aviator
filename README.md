@@ -23,16 +23,16 @@ Current Tech Stack:
 
 # TO-DO: (In Order)
 
-# TO-DO: 1. Manually deploy to github pages or heroku
+# TO-DO: 1. Add code splitting
 
-# TO-DO: 2. Add circle ci support for automated deployments
+# TO-DO: 2. Add performance insights (Lighthouse / performance budget)
 
-# TO-DO: 3. Add cypress support
+# TO-DO: 3. Manually deploy to github pages or heroku
 
-# TO-DO: 4. Add Figma / Storybook
+# TO-DO: 4. Add circle ci support for automated deployments
 
-# TO-DO: 5. Add code splitting
+# TO-DO: 5. Add cypress support
 
-# TO-DO: 6. Add performance insights (Lighthouse)
+# TO-DO: 6. Add Figma / Storybook
 
 # TO-DO: 7. fix @ts-ignores

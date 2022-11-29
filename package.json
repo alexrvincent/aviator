@@ -35,7 +35,8 @@
     "clean": "rm -rf ./dist",
     "clean-and-install": "yarn clean && yarn install --production=false",
     "gc": "node ./util/generateComponent.js",
-    "gr": "node ./util/generateRoute.js"
+    "gr": "node ./util/generateRoute.js",
+    "gh": "node ./util/generateHook.js"
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [
