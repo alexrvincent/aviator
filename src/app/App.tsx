@@ -1,32 +1,21 @@
 import React from 'react';
-import useStyles from 'isomorphic-style-loader/useStyles';
-import s from './App.scss';
 import Routes from 'Routes/index';
 import NavBar from 'Components/NavBar';
-
-// import classNames from 'util/classNames';
-// import store from './redux/index';
-// import { Provider } from 'react-redux';
+import classNames from 'util/classNames';
 
 const App: React.FC = () => {
   // Root level class name. Use sparingly.
-  // const cls = classNames({
-  //   app: true,
-  // });
-
-  useStyles(s);
+  const cls = classNames({
+    app: true,
+  });
 
   return (
-    <div className={s.app}>
+    <div className={cls}>
       <NavBar />
-      {/* @ts-ignore */}
-      {/* Add top level app integrations here (Redux, Router, Context, Internationalization), etc */}
-      {/* <Provider store={store}> */}
+      {/* Add top level app integrations here (Redux, Router, Internationalization), etc. For adding Contexts, see AppProvider.tsx */}
       <Routes />
-      {/* </Provider> */}
     </div>
   );
 };
 
-// export default App;
 export default App;

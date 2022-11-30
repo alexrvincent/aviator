@@ -106,6 +106,7 @@ module.exports = (env) => {
       modules: ['src', 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
+        App: path.resolve(__dirname, '../src/app/'),
         Components: path.resolve(__dirname, '../src/components/'),
         Hooks: path.resolve(__dirname, '../src/hooks/'),
         css: path.resolve(__dirname, '../src/css/'),

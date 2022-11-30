@@ -48,6 +48,7 @@
     "paths": {
       // "@styles": ["styles/index"],
       // "@fonts": ["fonts/index"],
+      "App/*": ["src/app/*"],
       "Components/*": ["src/components/*"],
       "Routes/*": ["src/routes/*"],
       "Hooks/*": ["src/hooks/*"],

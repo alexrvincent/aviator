@@ -30,10 +30,16 @@ module.exports = {
     // Resolve .jpg and similar files to /src/test/fileMock.js
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/src/test/fileMock.js`,
     // Resolve Components/.. pathings to the correct ./src/components.. files
+    'App/(.*)$': '<rootDir>/src/app/$1',
     'Components/(.*)$': '<rootDir>/src/components/$1',
     'Routes/(.*)$': '<rootDir>/src/routes/$1',
+    'Hooks/(.*)$': '<rootDir>/src/hooks/$1',
     'util/(.*)': '<rootDir>/util/$1',
   },
+  transformIgnorePatterns: [
+    "[/\\\\]node_modules[/\\\\](?!react-children-utilities).+\\.(js|jsx|ts|tsx)$",
+    "^.+\\.module\\.(css|sass|scss)$"
+],
   // Tells Jest what folders to ignore for tests
   testPathIgnorePatterns: [`node_modules`, `\\.cache`],
   testURL: `http://localhost`,

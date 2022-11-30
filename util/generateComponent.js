@@ -58,7 +58,7 @@ const generateComponent = (name) => {
     fs.closeSync(fs.openSync(`${filePath}/${name}/${name}.test.tsx`, 'w'));
     fs.writeFile(
       `${filePath}/${name}/${name}.test.tsx`,
-      `import React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport ${name} from 'Components/${name}';\n\ndescribe('<${name} />', () => {\n\tit('should render the Component normally', () => {\n\t\tconst props = { children: ["${name}"] }\n\t\trender(<${name} {...props} />);\n\t\texpect(screen.getByText("${name}")).toBeInTheDocument;\n\t});\n});\n`,
+      `import React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport ${name} from 'Components/${name}';\n\ndescribe('<${name} />', () => {\n  it('should render the Component normally', () => {\n    const props = { children: ['${name}'] };\n    render(<${name} {...props} />);\n    expect(screen.getByText('${name}')).toBeInTheDocument;\n  });\n});\n`,
       'utf-8',
       (e) => {
         if (e) {
