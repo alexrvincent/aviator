@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// @ts-ignore
+import * as ReactDOMClient from 'react-dom/client';
 import App from 'App/App';
 import AppProvider from 'App/AppProvider';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,19 +13,22 @@ import './index.scss';
 //   return () => removeCss.forEach((dispose) => dispose());
 // };
 
+// When in client development mode, use ReactDOM.createRoot().render for clean render, otherwise always hydrateRoot.
 // @ts-ignore
-// When in client development mode, use ReactDOM.render for clean render, otherwise always hydrate.
-const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
-renderMethod(
+const Root = () => (
   <React.StrictMode>
-    {/* <StyleContext.Provider value={{ insertCss }}> */}
     <BrowserRouter>
       <AppProvider>
         <App />
       </AppProvider>
     </BrowserRouter>
-    {/* </StyleContext.Provider> */}
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </React.StrictMode>
 );
+
+// @ts-ignore
+if (module.hot) {
+  ReactDOMClient.createRoot(document.getElementById('root')).render(<Root />);
+} else {
+  ReactDOMClient.hydrateRoot(document.getElementById('root'), <Root />);
+}

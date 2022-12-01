@@ -34,12 +34,12 @@ module.exports = {
     'Components/(.*)$': '<rootDir>/src/components/$1',
     'Routes/(.*)$': '<rootDir>/src/routes/$1',
     'Hooks/(.*)$': '<rootDir>/src/hooks/$1',
-    'util/(.*)': '<rootDir>/util/$1',
+    'util/index': '<rootDir>/util/index.js',
   },
   transformIgnorePatterns: [
-    "[/\\\\]node_modules[/\\\\](?!react-children-utilities).+\\.(js|jsx|ts|tsx)$",
-    "^.+\\.module\\.(css|sass|scss)$"
-],
+    '[/\\\\]node_modules[/\\\\](?!react-children-utilities).+\\.(js|jsx|ts|tsx)$',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
   // Tells Jest what folders to ignore for tests
   testPathIgnorePatterns: [`node_modules`, `\\.cache`],
   testURL: `http://localhost`,

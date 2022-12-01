@@ -11,8 +11,8 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
-import App from '../src/app/index';
-import StyleContext from 'isomorphic-style-loader/StyleContext';
+import App, { AppProvider } from '../src/app/index';
+//import StyleContext from 'isomorphic-style-loader/StyleContext';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -66,13 +66,13 @@ app.get(routes.default, (req, res) => {
     template = template.replace(/%title%/, 'Aviator Server Rendered App');
 
     // 2. Inject the server-rendered React app into the template
-    const css = new Set();
-    const insertCss = (...styles) => {
-      styles.forEach((style) => {
-        css.add(style._getCss());
-      });
-    };
-    template = template.replace(/criticalCss{white-space:normal;}/, [...css].join(''));
+    // const css = new Set();
+    // const insertCss = (...styles) => {
+    //   styles.forEach((style) => {
+    //     css.add(style._getCss());
+    //   });
+    // };
+    // template = template.replace(/criticalCss{white-space:normal;}/, [...css].join(''));
 
     // 3. Inject the client script (webpack needs to do this)
     // let templateWithCriticalCSSandClientScriptInjected = templateWithCriticalCssInjected.replace(/var client;}/, "var clientInjected;");
@@ -84,18 +84,16 @@ app.get(routes.default, (req, res) => {
     // 4. Server side render this route ...
     const serverRender = ReactDOMServer.renderToString(
       <React.StrictMode>
-        <StyleContext.Provider value={{ insertCss }}>
-          <StaticRouter>
+        <StaticRouter>
+          <AppProvider>
             <App />
-          </StaticRouter>
-        </StyleContext.Provider>
+          </AppProvider>
+        </StaticRouter>
       </React.StrictMode>,
     );
     // 4a. Inject the server-side rendered react code into the injected template
     template = template.replace(/aviator-client/, 'aviator');
     let fullPayload = template.replace(/%aviator%/, serverRender);
-
-    console.log(serverRender);
 
     // And send it to the client
     return res.send(fullPayload);
