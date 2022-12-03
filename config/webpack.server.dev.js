@@ -44,9 +44,6 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          // We use isomorphic-style-loader to run on node.js because style-loader requires 'document' a browser exclusive item
-          // Creates `style` nodes from JS strings
-          'isomorphic-style-loader',
           {
             // Translates CSS into CommonJS
             loader: 'css-loader',

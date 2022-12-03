@@ -21,23 +21,26 @@ import useFontFaceObserver from 'use-font-face-observer';
 export const AppContext = React.createContext({}); // AppContext - a context of all contexts.
 export const FontContext = React.createContext(false); // FontContext - a context storing whether fonts have been loaded into the app
 
-const AppProvider: React.FC = (props) => {
+// @ts-ignore
+const AppProvider: React.FC = ({ isServer, children }) => {
   // 2. Add the data for your contexts here
   const contexts = {
+    // @ts-ignore
+    AppContext: {
+      isServer,
+    },
     FontContext: useFontFaceObserver([
       {
-        family: `Poppins`,
-        weight: `normal`,
+        family: `poppins-regular`,
       },
     ]),
   };
 
-  // 3. Optional - assemble the contexts how you'd like to inject as the value of your new context
-
   // 4. Nest the contexts together and pass them the values you'd like
   return (
-    <AppContext.Provider value={contexts}>
-      <FontContext.Provider value={contexts.FontContext}>{props.children}</FontContext.Provider>
+    <AppContext.Provider value={contexts.AppContext}>
+      {/* @ts-ignore */}
+      <FontContext.Provider value={contexts.FontContext}>{children}</FontContext.Provider>
     </AppContext.Provider>
   );
 };

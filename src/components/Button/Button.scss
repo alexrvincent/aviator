@@ -1,15 +1,11 @@
 .btn {
   padding: 12px;
-  transition: all 0.25s;
+  transition: background-position 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
   text-align: center;
   border-radius: 10px;
   display: inline-block;
   cursor: pointer;
   box-sizing: border-box;
-}
-
-.btn:hover {
-  translate: transformy(-10px);
 }
 
 .btn-grad {
@@ -23,7 +19,6 @@
 .btn-grad:hover {
   background-position: right center; /* change the direction of the change here */
   color: white;
-  text-decoration: none;
   box-shadow: 0 0 20px #9733ee;
 }
 

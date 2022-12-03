@@ -49,7 +49,6 @@ module.exports = (env) => {
         {
           test: /\.s[ac]ss$/,
           use: [
-            'isomorphic-style-loader',
             {
               loader: MiniCssExtractPlugin.loader,
             },

@@ -10,7 +10,6 @@
     "css-loader",
     "eslint-plugin-react-hooks",
     "identity-obj-proxy",
-    "isomorphic-style-loader",
     "node-sass",
     "sass-loader",
     "style-loader",

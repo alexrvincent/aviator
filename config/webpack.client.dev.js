@@ -37,8 +37,6 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          // Exposes withStyles, useStyles hooks in components letting you write critical rendering CSS
-          'isomorphic-style-loader',
           // Creates `style` nodes from JS strings and injects them into the dev hot load module
           'style-loader',
           // Translates CSS into CommonJS

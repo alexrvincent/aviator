@@ -9,15 +9,13 @@ import path from 'path';
 import fs from 'fs';
 import express from 'express';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
-import App, { AppProvider } from '../src/app/index';
-//import StyleContext from 'isomorphic-style-loader/StyleContext';
+import { renderToPipeableStream } from 'react-dom/server';
+import App from '../src/app/index';
 
 const app = express();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
-const DEFAULT_TEMPLATE = path.join(__dirname, 'dist', 'app.html');
+const BUILD_STATS = path.join(__dirname, 'dist', 'static', 'build-stats.json');
 
 /* Step 1: Define all the routes our express server should be able to resolve */
 const routes = {
@@ -58,45 +56,10 @@ app.get(routes.default, (req, res) => {
     //   },
     // };
 
-    // 1. Select the correct template, in this cause default
-    let template = fs.readFileSync(DEFAULT_TEMPLATE, 'utf8');
-
-    // TO-DO: Have a more intelligent template selector based on express url routing rules
-    // 2. Update the HTML head
-    template = template.replace(/%title%/, 'Aviator Server Rendered App');
-
-    // 2. Inject the server-rendered React app into the template
-    // const css = new Set();
-    // const insertCss = (...styles) => {
-    //   styles.forEach((style) => {
-    //     css.add(style._getCss());
-    //   });
-    // };
-    // template = template.replace(/criticalCss{white-space:normal;}/, [...css].join(''));
-
-    // 3. Inject the client script (webpack needs to do this)
-    // let templateWithCriticalCSSandClientScriptInjected = templateWithCriticalCssInjected.replace(/var client;}/, "var clientInjected;");
-    let state = {
-      myState: 'isServer',
-    };
-    template = template.replace(/window/, `window.__INITIAL_DATA__ = ${JSON.stringify(state)}`);
-
-    // 4. Server side render this route ...
-    const serverRender = ReactDOMServer.renderToString(
-      <React.StrictMode>
-        <StaticRouter>
-          <AppProvider>
-            <App />
-          </AppProvider>
-        </StaticRouter>
-      </React.StrictMode>,
-    );
-    // 4a. Inject the server-side rendered react code into the injected template
-    template = template.replace(/aviator-client/, 'aviator');
-    let fullPayload = template.replace(/%aviator%/, serverRender);
+    render(req.url, res);
 
     // And send it to the client
-    return res.send(fullPayload);
+    // return res.send(fullPayload);
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message, e.stack);
@@ -108,6 +71,105 @@ app.get(routes.default, (req, res) => {
 });
 
 /* Step 3: Start the server */
-app.listen(8000, '127.0.0.1', () => {
-  console.log(`Running 'aviator' at http://localhost:${port} ...`);
-});
+app
+  .listen(8000, '127.0.0.1', () => {
+    console.log(`Running 'aviator' at http://localhost:${port} ...`);
+  })
+  .on('error', function (error) {
+    if (error.syscall !== 'listen') {
+      throw error;
+    }
+    const isPipe = (portOrPipe) => Number.isNaN(portOrPipe);
+    const bind = isPipe(PORT) ? 'Pipe ' + PORT : 'Port ' + PORT;
+    switch (error.code) {
+      case 'EACCES':
+        console.error(bind + ' requires elevated privileges');
+        process.exit(1);
+        break;
+      case 'EADDRINUSE':
+        console.error(bind + ' is already in use');
+        process.exit(1);
+        break;
+      default:
+        throw error;
+    }
+  });
+
+function render(url, res) {
+  // Stream
+  res.socket.on('error', (error) => {
+    console.error('Fatal', error);
+  });
+
+  let buildStats = fs.readFileSync(BUILD_STATS);
+  buildStats = JSON.parse(buildStats);
+  let js = [];
+  let css = [];
+  let assets = {
+    js,
+    css,
+  };
+  Object.values(buildStats.assetsByChunkName).forEach((chunk) => {
+    let onlyJavaScript = chunk.filter((asset) => asset.endsWith('.js'));
+    let onlyCSS = chunk.filter((asset) => asset.endsWith('.css'));
+    js.push(...onlyJavaScript);
+    css.push(...onlyCSS);
+  });
+
+  // 3. Inject the client script (webpack needs to do this)
+  // let state = {
+  //   myState: 'isServer',
+  // };
+
+  let documentTitle = 'Aviator Server Build';
+
+  const stream = renderToPipeableStream(<App assets={assets} title={documentTitle} isServer />, {
+    // identifierPrefix?: string,
+    // namespaceURI?: string,
+    // nonce?: string,
+    // bootstrapScriptContent?: string,
+    // bootstrapScripts?: Array<string>,
+    // bootstrapModules?: Array<string>,
+    // progressiveChunkSize?: number,
+    // onShellReady?: () => void,
+    // onShellError?: () => void,
+    // onAllReady?: () => void,
+    // onError?: (error: mixed) => void,
+    bootstrapScripts: js,
+    onShellError() {
+      // Something errored before we could complete the shell so we emit an alternative shell.
+      res.statusCode = 500;
+      res.send('<!doctype html><p>Loading...</p><script src="clientrender.js"></script>');
+    },
+    onShellReady() {
+      // If something errored before we started streaming, we set the error code appropriately.
+      res.setHeader('Content-type', 'text/html');
+      stream.pipe(res);
+    },
+    onError(x) {
+      console.error(x);
+    },
+  });
+}
+
+// function handleErrors(fn) {
+//   return async function (req, res, next) {
+//     try {
+//       return await fn(req, res);
+//     } catch (x) {
+//       next(x);
+//     }
+//   };
+// }
+
+// async function waitForWebpack() {
+//   while (true) {
+//     try {
+//       readFileSync(path.resolve(__dirname, '../dist/static/build-stats.json'));
+//       return;
+//     } catch (err) {
+//       console.log('Could not find webpack build output. Will retry in a second...');
+//       await new Promise((resolve) => setTimeout(resolve, 1000));
+//     }
+//   }
+// }
