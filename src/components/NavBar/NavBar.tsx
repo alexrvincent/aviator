@@ -8,7 +8,7 @@ const NavBar: React.FC = () => {
   return (
     <header className="navbar">
       <div className="navbarLogo">
-        <Link to="/">
+        <Link to="/" aria-label="Aviator Icon">
           <Logo />
         </Link>
       </div>

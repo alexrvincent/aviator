@@ -11,6 +11,7 @@ import express from 'express';
 import React from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import App from '../src/app/index';
+import expressStaticGzip from 'express-static-gzip';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -20,17 +21,37 @@ const BUILD_STATS = path.join(__dirname, 'dist', 'static', 'build-stats.json');
 /* Step 1: Define all the routes our express server should be able to resolve */
 const routes = {
   status: '/status',
+  robots: '/robots.txt',
   default: '*',
 };
 
 /* Step 2: Define any static files we want express to serve from its local directory */
-const DIST_DIR = path.join(__dirname, 'dist');
-const STATIC_DIR = path.join(__dirname, 'dist', 'static');
+// const DIST_DIR = path.join(__dirname, 'dist');
+const STATIC_JS_DIR = path.join(__dirname, 'dist', 'static', 'js');
+const STATIC_CSS_DIR = path.join(__dirname, 'dist', 'static', 'css');
 const PUBLIC_DIR = path.join(__dirname, 'server', 'public');
 
-app.use(express.static(DIST_DIR));
-app.use(express.static(STATIC_DIR));
 app.use(express.static(PUBLIC_DIR));
+app.use(
+  '/static/js/',
+  expressStaticGzip(STATIC_JS_DIR, {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+    setHeaders: function (res) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    },
+  }),
+);
+app.use(
+  '/static/css/',
+  expressStaticGzip(STATIC_CSS_DIR, {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+    setHeaders: function (res) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    },
+  }),
+);
 
 // app.set('views', path.join(__dirname, 'public'));
 // app.set('view engine', 'html');
@@ -40,6 +61,12 @@ app.use(express.static(PUBLIC_DIR));
 // '/status' - server health check
 app.get(routes.status, (req, res) => {
   res.send('Status OK');
+});
+
+app.get(routes.robots, (req, res) => {
+  const ROBOTS_TXT = path.join(__dirname, 'server', 'public', 'robots.txt');
+  const robotsTxt = fs.readFileSync(ROBOTS_TXT);
+  res.send(robotsTxt);
 });
 
 // Any route not matching the ones listed above
@@ -80,7 +107,7 @@ app
       throw error;
     }
     const isPipe = (portOrPipe) => Number.isNaN(portOrPipe);
-    const bind = isPipe(PORT) ? 'Pipe ' + PORT : 'Port ' + PORT;
+    const bind = isPipe(port) ? 'Pipe ' + port : 'Port ' + port;
     switch (error.code) {
       case 'EACCES':
         console.error(bind + ' requires elevated privileges');

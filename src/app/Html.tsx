@@ -14,6 +14,10 @@ const Html: React.FC = (props) => {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Alex Vincent's personal living boilerplate for production-grade hybrid React apps."
+        ></meta>
         <link rel="stylesheet" href={assets.css[0]} />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

@@ -1,6 +1,6 @@
 # aviator 👨🏻‍✈️
 
-Alex Vincent's personal living boilerplate for production-grade client-side React apps.
+Alex Vincent's personal living boilerplate for production-grade hybrid React apps.
 
 Current Tech Stack:
 

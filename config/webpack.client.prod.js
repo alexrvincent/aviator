@@ -19,6 +19,8 @@ const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env) => {
@@ -31,6 +33,9 @@ module.exports = (env) => {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
       chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+    },
+    stats: {
+      errorDetails: true,
     },
     module: {
       rules: [
@@ -64,6 +69,17 @@ module.exports = (env) => {
       ],
     },
     plugins: [
+      new CompressionPlugin({
+        // test: /\.js$|\.css$|\.html$/,
+        // deleteOriginalAssets: true,
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+      new BrotliPlugin({
+        // deleteOriginalAssets: true,
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
       new MiniCssExtractPlugin({
         filename: 'static/css/[name].[contenthash:8].css',
         chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
