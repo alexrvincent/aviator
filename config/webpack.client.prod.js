@@ -16,6 +16,7 @@
 
 const path = require('path');
 const paths = require('./paths');
+const assembleCacheGroups = require('./codespliting');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -28,7 +29,9 @@ module.exports = (env) => {
     target: 'web',
     mode: 'production',
     devtool: 'source-map',
-    entry: paths.appIndexJs,
+    entry: {
+      app: paths.appIndexJs,
+    },
     output: {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
@@ -106,14 +109,7 @@ module.exports = (env) => {
     optimization: {
       splitChunks: {
         cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'all',
-          },
-          manifest: {
-            name: 'manifest',
-          },
+          ...assembleCacheGroups(),
         },
       },
     },
