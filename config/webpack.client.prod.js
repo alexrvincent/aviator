@@ -23,12 +23,13 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = (env) => {
   const webpackClientProd = {
     target: 'web',
     mode: 'production',
-    devtool: 'source-map',
     entry: {
       app: paths.appIndexJs,
     },
@@ -112,6 +113,27 @@ module.exports = (env) => {
           ...assembleCacheGroups(),
         },
       },
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        new CssMinimizerPlugin({
+          parallel: true,
+          minimizerOptions: {
+            preset: [
+              'default',
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
+          },
+        }),
+      ],
     },
     resolve: {
       modules: ['src', 'node_modules'],
@@ -128,6 +150,11 @@ module.exports = (env) => {
         // to alias it for the production bundle
         // redux: require.resolve('redux'),
       },
+    },
+    performance: {
+      maxAssetSize: 150000,
+      maxEntrypointSize: 150000,
+      hints: 'warning',
     },
   };
 

@@ -20,12 +20,10 @@ module.exports = {
   mode: 'production',
   target: 'node',
   cache: false,
-  devtool: 'eval-source-map',
   entry: paths.appServer,
   output: {
-    path: path.join(__dirname, '../', 'dist'),
+    path: paths.appDist,
     filename: 'server.js',
-    // publicPath: '/',
   },
   module: {
     rules: [
@@ -47,11 +45,6 @@ module.exports = {
           {
             // Translates CSS into CommonJS
             loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              sourceMap: true,
-            },
           },
           {
             // Compiles Sass to CSS
@@ -67,6 +60,7 @@ module.exports = {
     ],
   },
   resolve: {
+    modules: ['src', 'node_modules'],
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
       App: path.resolve(__dirname, '../src/app/'),

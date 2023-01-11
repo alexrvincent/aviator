@@ -36,6 +36,7 @@ module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
+  appDistBuildStats: resolveApp('dist/static/build-stats.json'),
   appDist: resolveApp('dist'),
   appDistStatic: resolveApp('dist/static'),
   appClientPublic: resolveApp('client/public'),
