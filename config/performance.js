@@ -2,8 +2,20 @@
 // Add and export your performance metrics here
 
 module.exports = {
-  bundleSize: {
-    maxAssetSize: 10000, // in bytes
-    maxEntrypointSize: 10000, // in bytes
+  budgets: {
+    assets: [
+      {
+        assetPath: `static/js/app.*.js.br`,
+        maxSize: 4000,
+      },
+      {
+        assetPath: `static/js/vendor.*.js.br`,
+        maxSize: 60000,
+      },
+      {
+        assetPath: `static/css/app.*.css`,
+        maxSize: 6000,
+      },
+    ],
   },
 };
