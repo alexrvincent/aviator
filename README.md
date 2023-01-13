@@ -2,57 +2,61 @@
 
 Alex Vincent's personal living boilerplate for production-grade hybrid React apps.
 
-Current Tech Stack:
+# Current Tech Stack:
 
-- Yarn
-- TypeScript
-- React
-- Husky
-- Webpack (Client / Dev Server & Productionized Builds)
-- React Router (DOM)
-- SASS
-- ESLint (and typescript-eslint)
-- Prettier
-- Stylelint
-- Babel
-- Jest
-- Normalize.css
-- Manifest best practices (optimized mobile icons)
-- Custom fonts / font-face
-- Developer tooling (Auto-generated components, routes, unit-tests)
+1. Development
 
-# TO-DO: (In Order)
+   - Package Manager: Yarn
+   - Development Language: TypeScript
+   - Front-End Framework: React
+   - Server-Side Framework: Express
+   - Routing: React Router (DOM)
+   - CSS Framework: SASS
+   - CSS Tooling: Normalize.css, Custom fonts / Font Faces
+   - Manifest: Optimized Mobile Icons
 
-# TO-DO: 2. Add code splitting for custom code modules, routes, css
+2. Linting & Formatting
 
-# TO-DO: 3. Add Figma / Storybook
+   - Linter(s): ESLint (using typescript-eslint rules)
+   - Formatter: Prettier
 
-# TO-DO 4. Add an API library
+3. Testing
 
-# TO-DO: 5. Add an automated testing framework support (Cypress / Playwright)
+   - Test Runner: Jest
 
-# TO-DO: 6. Set up NGINX
+4. CI / CD Tooling
 
-# TO-DO: 7. Set up Dockerfile
+   - Version Control: Git
+   - Git Hooks: Husky
+   - Bundler: Webpack (Dev/Prod Client Builds, Dev/Prod Server Builds)
+   - Transpiler: Babel
+   - Custom Tooling (Auto-generated components, routes, unit-tests)
 
-# TO-DO: 8. Manually deploy to Heroku
+5. Custom Tooling
 
-# TO-DO: 9. Automate deployments using CircleCI
+   - Webpack Code Splitting by npm library, custom modules, routes
+   - Performance Budgeting (Time Based, Quantity Based, Rules Based)
 
-# ---------- Come Back To / TO-DOs -------
+# TO-DOs (In Order):
 
-# TO-DO: Add performance insights (Lighthouse / performance budget). Lighthouse node CLI doesn't work on localhost
+1. Add code splitting for custom code modules, routes, css
+2. Add Figma / Storybook Support
+3. Add an API library (React Query)
+4. Add an automated testing framework support (Cypress / Playwright)
+5. Set up NGINX
+6. Set up Dockerfile
+7. Manually deploy to Heroku
+8. Automate deployments using CircleCI
 
-# so we'll need to find a way to test it when we can get environments up. Ideally I would like some kind of yarn command
+# TO-DOs to Come Back To
 
-# I could run to get a Lighthouse report, but that doesn't exist right now. We'll also be doing Performance Budgeting through
+1. Add Timed Based (web core vitals), Rules Based (Lighthouse) performance budgets. Lighthouse node CLI doesn't work on localhost
+   so we'll need to find a way to test it when we can get environments up. Ideally I would like some kind of yarn command
+   I could run to get a Lighthouse report, but that doesn't exist right now. We'll also be doing Performance Budgeting through
+   Lighthouse as well when this works.
 
-# Lighthouse as well when this works.
+2. Critical CSS rendering (the process of putting above the fold css in the head as a static style tag) seems to be
+   an optimization that requires a bit of maintenance (aka there isn't any clearly nice tooling that doesn't come with lots of
+   overhead). The advice is to implement it only when it becomes an issue.
 
-# TO-DO: Critical CSS rendering (the process of putting above the fold css in the head as a static style tag) seems to be
-
-# an optimization that requires a bit of maintenance (aka there isn't any clearly nice tooling that doesn't come with lots of
-
-# overhead). The advice is to implement it only when it becomes an issue.
-
-# TO-DO Fix @ts-ignores
+3. Fix @ts-ignores

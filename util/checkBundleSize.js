@@ -46,13 +46,24 @@ const checkBundleSize = function () {
   let results = [];
   let errors = [];
 
+  const calculateBudget = (asset) => {
+    if (asset.size > assetPaths[asset.name].maxSize) {
+      errors.push(`❌ '${asset.name}' → (${asset.size} of ${assetPaths[asset.name].maxSize})`);
+    } else {
+      results.push(`✔️  '${asset.name}' → (${asset.size} of ${assetPaths[asset.name].maxSize})`);
+    }
+  };
+
   // 3. Determine whether each asset has exceeded its budget
   for (let asset of stats.assets) {
     if (assetPaths[asset.name]) {
-      if (asset.size > assetPaths[asset.name].maxSize) {
-        errors.push(`❌ '${asset.name}' → (${asset.size} of ${assetPaths[asset.name].maxSize})`);
-      } else {
-        results.push(`✔️  '${asset.name}' → (${asset.size} of ${assetPaths[asset.name].maxSize})`);
+      calculateBudget(asset);
+
+      // An asset may have related (compressed) assets. Check if they require budget checks too.
+      if (asset.related && Array.isArray(asset.related) && asset.related.length > 0) {
+        for (let relatedAsset of asset.related) {
+          calculateBudget(relatedAsset);
+        }
       }
     }
   }

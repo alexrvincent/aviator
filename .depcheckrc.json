@@ -19,7 +19,8 @@
     "stylelint-scss",
     "ts-loader",
     "webpack-cli",
-    "webpack-dev-server"
+    "webpack-dev-server",
+    "zlib"
   ],
   "skip-missing": true
 }

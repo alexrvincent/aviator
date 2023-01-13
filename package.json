@@ -26,9 +26,9 @@
     "dev-client": "yarn install && webpack serve --config config/webpack.client.dev.js --color --host 0.0.0.0",
     "build-client": "webpack --config config/webpack.client.prod.js --profile --color --json=dist/static/build-stats.json",
     "analyze-client": "webpack --config config/webpack.client.prod.js --env analyze=true",
-    "analyze-client-bundle-size": "yarn bundlesize",
+    "weigh-client": "node ./util/checkBundleSize.js",
     "--SERVER--": "",
-    "dev-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --watch --progress --color --config config/webpack.server.dev.js' 'just-wait -t 300 --pattern \"dist/static\" && nodemon ./dist/server.js' ",
+    "dev-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --watch --color --config config/webpack.server.dev.js' 'just-wait -t 300 --pattern \"dist/static\" && nodemon ./dist/server.js' ",
     "build-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --color --config config/webpack.server.prod.js --stats verbose'",
     "dockerfile": "concurrently --raw 'yarn lint-css' 'yarn lint-js' 'yarn test' && yarn build-server",
     "start": "node dist/server.js",
@@ -37,8 +37,7 @@
     "clean-and-install": "yarn clean && yarn install --production=false",
     "gc": "node ./util/generateComponent.js",
     "gr": "node ./util/generateRoute.js",
-    "gh": "node ./util/generateHook.js",
-    "check-bundle-size": "node ./util/checkBundleSize.js"
+    "gh": "node ./util/generateHook.js"
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [
@@ -90,7 +89,6 @@
     "@typescript-eslint/parser": "^4.26.0",
     "babel-jest": "^27.0.2",
     "babel-loader": "^8.2.2",
-    "brotli-webpack-plugin": "^1.1.0",
     "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^5.2.4",
     "css-minimizer-webpack-plugin": "^4.2.2",
@@ -103,7 +101,7 @@
     "express-static-gzip": "^2.1.7",
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "glob": "^8.0.3",
-    "html-webpack-plugin": "^5.3.1",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.4",
@@ -126,6 +124,7 @@
     "webpack": "^5.37.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "zlib": "^1.0.5"
   }
 }

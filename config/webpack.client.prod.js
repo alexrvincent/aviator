@@ -21,10 +21,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BrotliPlugin = require('brotli-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const zlib = require('zlib');
 
 module.exports = (env) => {
   const webpackClientProd = {
@@ -37,9 +37,6 @@ module.exports = (env) => {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
       chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
-    },
-    stats: {
-      errorDetails: true,
     },
     module: {
       rules: [
@@ -74,13 +71,19 @@ module.exports = (env) => {
     },
     plugins: [
       new CompressionPlugin({
-        // test: /\.js$|\.css$|\.html$/,
-        // deleteOriginalAssets: true,
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
         threshold: 10240,
         minRatio: 0.8,
       }),
-      new BrotliPlugin({
-        // deleteOriginalAssets: true,
+      new CompressionPlugin({
+        filename: '[path][base].br',
+        algorithm: 'brotliCompress',
+        compressionOptions: {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        },
         threshold: 10240,
         minRatio: 0.8,
       }),
@@ -150,11 +153,6 @@ module.exports = (env) => {
         // to alias it for the production bundle
         // redux: require.resolve('redux'),
       },
-    },
-    performance: {
-      maxAssetSize: 150000,
-      maxEntrypointSize: 150000,
-      hints: 'warning',
     },
   };
 

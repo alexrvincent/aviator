@@ -25,6 +25,9 @@ module.exports = {
     path: paths.appDist,
     filename: 'server.js',
   },
+  externals: {
+    express: 'require("express")',
+  },
   module: {
     rules: [
       {

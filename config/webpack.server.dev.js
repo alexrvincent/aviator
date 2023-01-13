@@ -26,6 +26,9 @@ module.exports = {
     filename: 'server.js',
     publicPath: '/',
   },
+  externals: {
+    express: 'require("express")',
+  },
   module: {
     rules: [
       {
