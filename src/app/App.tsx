@@ -25,20 +25,23 @@ const App: React.FC = ({ assets = {}, title, isServer = false, isDevServer = fal
 
   return (
     /* @ts-ignore */
-    <Html assets={assets} title={title} isDevServer={isDevServer}>
+    <React.StrictMode>
       {/* @ts-ignore */}
-      <AppProvider isServer={isServer}>
+      <Html assets={assets} title={title} isDevServer={isDevServer}>
         {/* @ts-ignore */}
-        <ReactRouter>
-          <div className={cls}>
-            <NavBar />
-            <Suspense fallback={<div> LOADING </div>}>
-              <Routes />
-            </Suspense>
-          </div>
-        </ReactRouter>
-      </AppProvider>
-    </Html>
+        <AppProvider isServer={isServer}>
+          {/* @ts-ignore */}
+          <ReactRouter>
+            <div className={cls}>
+              <NavBar />
+              <Suspense fallback={<div> LOADING </div>}>
+                <Routes />
+              </Suspense>
+            </div>
+          </ReactRouter>
+        </AppProvider>
+      </Html>
+    </React.StrictMode>
   );
 };
 

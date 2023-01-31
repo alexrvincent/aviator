@@ -52,4 +52,5 @@ module.exports = {
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
   appNodeModules: resolveApp('node_modules'),
+  appCoreCss: resolveApp('src/css/core.scss'),
 };

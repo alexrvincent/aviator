@@ -39,3 +39,15 @@
 .font-regular {
   font-family: 'poppins-regular', sans-serif;
 }
+
+body {
+  @extend .font-regular;
+}
+
+strong {
+  @extend .font-bold;
+}
+
+p {
+  @extend .font-light;
+}

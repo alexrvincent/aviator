@@ -37,6 +37,10 @@ module.exports = {
         assetPath: `static/css/app.*.css`,
         maxSize: 6000,
       },
+      {
+        assetPath: `static/css/core.*.css`,
+        maxSize: 6000,
+      },
     ],
   },
 };

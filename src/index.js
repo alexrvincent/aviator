@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import { hydrateRoot, createRoot } from 'react-dom/client';
 import App from 'App/App';
-import './index.scss';
+import 'App/App.scss';
 
 // @ts-ignore
 if (module && module.hot) {

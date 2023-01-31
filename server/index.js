@@ -1,8 +1,6 @@
 /* 
   The purpose of this file is to describe to node how to run an express server rendering the results of a react app locally.
-
   Everything you see here is parsed, served by node/express exclusively and is for local development only! Run yarn build-server to get a production server.js file
-
 */
 
 import path from 'path';
@@ -137,7 +135,7 @@ function render(url, res) {
     css,
   };
   Object.values(buildStats.assetsByChunkName).forEach((chunk) => {
-    let onlyJavaScript = chunk.filter((asset) => asset.endsWith('.js'));
+    let onlyJavaScript = chunk.filter((asset) => asset.endsWith('.js') && !asset.startsWith('static/js/core'));
     let onlyCSS = chunk.filter((asset) => asset.endsWith('.css'));
     js.push(...onlyJavaScript);
     css.push(...onlyCSS);

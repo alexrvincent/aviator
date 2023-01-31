@@ -32,6 +32,7 @@ module.exports = (env) => {
     mode: 'production',
     entry: {
       app: paths.appIndexJs,
+      core: paths.appCoreCss,
     },
     output: {
       path: paths.appDist,
@@ -153,6 +154,12 @@ module.exports = (env) => {
         // to alias it for the production bundle
         // redux: require.resolve('redux'),
       },
+    },
+    stats: {
+      colors: true,
+      modules: true,
+      reasons: true,
+      errorDetails: true,
     },
   };
 
