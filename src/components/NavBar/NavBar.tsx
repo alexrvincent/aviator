@@ -1,21 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Button from 'Components/Button';
 import Logo from './logo3.svg';
-import PlaceholderText from 'Components/PlaceholderText';
+import { Link, PlaceholderText } from 'Core/index';
 
 const NavBar: React.FC = () => {
   return (
     <header className="navbar">
       <div className="navbarLogo">
-        <Link to="/" aria-label="Aviator Icon">
+        {/* @ts-ignore */}
+        <Link to="/">
           <Logo />
         </Link>
       </div>
 
       <nav className="navbarLinks">
         <PlaceholderText>
-          <a href="#">How It Works</a>
+          {/* @ts-ignore */}
+          <Link to="/another-route">{'Another Route'}</Link>
         </PlaceholderText>
 
         <PlaceholderText>

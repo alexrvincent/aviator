@@ -52,5 +52,7 @@ module.exports = {
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
   appNodeModules: resolveApp('node_modules'),
-  appCoreCss: resolveApp('src/css/core.scss'),
+  appCoreCss: resolveApp('src/core/index.scss'),
+  appCore: resolveApp('src/core/index.js'),
+  appRouteHelloRoute: resolveApp('src/routes/HelloRoute/index.js'),
 };

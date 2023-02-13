@@ -1,6 +1,6 @@
 import React from 'react';
 import './HelloWorld.scss';
-import { classNames } from 'util/index';
+import { classNames } from 'Core/index';
 
 // Use an interface for public API definitions or when authoring a 3rd part api
 // interface Props {

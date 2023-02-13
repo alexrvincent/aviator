@@ -31,13 +31,13 @@ module.exports = (env) => {
     target: 'web',
     mode: 'production',
     entry: {
-      app: paths.appIndexJs,
-      core: paths.appCoreCss,
+      core: paths.appIndexJs,
+      // Clean this up! Figure out where core items are specified.
     },
     output: {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
-      chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+      chunkFilename: 'static/js/features.[name].[contenthash:8].js',
     },
     module: {
       rules: [
@@ -90,7 +90,7 @@ module.exports = (env) => {
       }),
       new MiniCssExtractPlugin({
         filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+        chunkFilename: 'static/css/features.[name].[contenthash:8].css',
       }),
       new HtmlWebpackPlugin({
         inject: true,
@@ -113,6 +113,7 @@ module.exports = (env) => {
     ],
     optimization: {
       splitChunks: {
+        // chunks: 'all',
         cacheGroups: {
           ...assembleCacheGroups(),
         },
@@ -144,6 +145,7 @@ module.exports = (env) => {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
         App: path.resolve(__dirname, '../src/app/'),
+        Core: path.resolve(__dirname, '../src/core/'),
         Components: path.resolve(__dirname, '../src/components/'),
         Hooks: path.resolve(__dirname, '../src/hooks/'),
         css: path.resolve(__dirname, '../src/css/'),

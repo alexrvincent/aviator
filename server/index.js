@@ -135,8 +135,10 @@ function render(url, res) {
     css,
   };
   Object.values(buildStats.assetsByChunkName).forEach((chunk) => {
-    let onlyJavaScript = chunk.filter((asset) => asset.endsWith('.js') && !asset.startsWith('static/js/core'));
-    let onlyCSS = chunk.filter((asset) => asset.endsWith('.css'));
+    let onlyJavaScript = chunk.filter(
+      (asset) => asset.endsWith('.js') && (asset.startsWith('static/js/core') || asset.startsWith('static/js/vendor')),
+    );
+    let onlyCSS = chunk.filter((asset) => asset.endsWith('.css') && asset.startsWith('static/css/core'));
     js.push(...onlyJavaScript);
     css.push(...onlyCSS);
   });
@@ -148,7 +150,7 @@ function render(url, res) {
 
   let documentTitle = 'Aviator Server Build';
 
-  const stream = renderToPipeableStream(<App assets={assets} title={documentTitle} isServer />, {
+  const stream = renderToPipeableStream(<App assets={assets} location={url} title={documentTitle} isServer />, {
     // identifierPrefix?: string,
     // namespaceURI?: string,
     // nonce?: string,

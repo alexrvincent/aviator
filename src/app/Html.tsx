@@ -18,7 +18,7 @@ const Html: React.FC = (props) => {
           name="description"
           content="Alex Vincent's personal living boilerplate for production-grade hybrid React apps."
         ></meta>
-        <link rel="stylesheet" href={assets.css[1]} />
+        <link rel="stylesheet" href={assets.css[0]} />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
