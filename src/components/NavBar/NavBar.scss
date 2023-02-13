@@ -1,0 +1,63 @@
+.navbar {
+  backdrop-filter: blur(6px);
+  background-color: black;
+  position: static;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9);
+  .navbarLogo {
+    display: flex;
+    align-items: center;
+    h1 {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 24px;
+      color: white;
+      margin: 0 6px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+  }
+  .navbarLinks {
+    vertical-align: middle;
+    display: flex;
+    a {
+      align-self: center;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 12px;
+      margin: 0 8px;
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+    .navbarButtons {
+      display: flex;
+      align-items: center;
+    }
+    button {
+      margin: 8px 0;
+    }
+    button:first-child {
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    position: static;
+    justify-content: space-between;
+    .navbarLinks a {
+      display: none;
+    }
+  }
+}

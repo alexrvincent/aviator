@@ -20,12 +20,13 @@ module.exports = {
   mode: 'production',
   target: 'node',
   cache: false,
-  devtool: 'eval-source-map',
   entry: paths.appServer,
   output: {
-    path: path.join(__dirname, '../', 'dist'),
+    path: paths.appDist,
     filename: 'server.js',
-    publicPath: '/',
+  },
+  externals: {
+    express: 'require("express")',
   },
   module: {
     rules: [
@@ -45,18 +46,8 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: [
           {
-            // We use isomorphic-style-loader to run on node.js because style-loader requires 'document' a browser exclusive item
-            // Creates `style` nodes from JS strings
-            loader: 'isomorphic-style-loader',
-          },
-          {
             // Translates CSS into CommonJS
             loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              sourceMap: true,
-            },
           },
           {
             // Compiles Sass to CSS
@@ -67,15 +58,18 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
         use: ['@svgr/webpack'],
       },
     ],
   },
   resolve: {
+    modules: ['src', 'node_modules'],
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
+      App: path.resolve(__dirname, '../src/app/'),
+      Core: path.resolve(__dirname, '../src/core/'),
       Components: path.resolve(__dirname, '../src/components/'),
+      Hooks: path.resolve(__dirname, '../src/hooks/'),
       css: path.resolve(__dirname, '../src/css/'),
       util: path.resolve(__dirname, '../util'),
       Routes: path.resolve(__dirname, '../src/routes/'),

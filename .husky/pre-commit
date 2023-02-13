@@ -4,5 +4,6 @@
 echo "🔍 Linting staged files ... "
 yarn lint-staged
 
-echo "🧪 Running test suite before committing ... "
-yarn test
+echo "📦 Checking for unused packages / dependencies"
+yarn checkdeps
+

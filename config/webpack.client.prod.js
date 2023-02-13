@@ -16,20 +16,28 @@
 
 const path = require('path');
 const paths = require('./paths');
+const assembleCacheGroups = require('./codespliting');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const zlib = require('zlib');
 
 module.exports = (env) => {
   const webpackClientProd = {
+    target: 'web',
     mode: 'production',
-    devtool: 'source-map',
-    entry: paths.appIndexJs,
+    entry: {
+      core: paths.appIndexJs,
+      // Clean this up! Figure out where core items are specified.
+    },
     output: {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
-      chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+      chunkFilename: 'static/js/features.[name].[contenthash:8].js',
     },
     module: {
       rules: [
@@ -56,9 +64,34 @@ module.exports = (env) => {
           ],
           sideEffects: true,
         },
+        {
+          test: /\.svg$/i,
+          use: ['@svgr/webpack'],
+        },
       ],
     },
     plugins: [
+      new CompressionPlugin({
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+      new CompressionPlugin({
+        filename: '[path][base].br',
+        algorithm: 'brotliCompress',
+        compressionOptions: {
+          params: {
+            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        },
+        threshold: 10240,
+        minRatio: 0.8,
+      }),
+      new MiniCssExtractPlugin({
+        filename: 'static/css/[name].[contenthash:8].css',
+        chunkFilename: 'static/css/features.[name].[contenthash:8].css',
+      }),
       new HtmlWebpackPlugin({
         inject: true,
         template: paths.appClientHtmlTemplateInput,
@@ -76,31 +109,45 @@ module.exports = (env) => {
           minifyURLs: true,
         },
       }),
-      new MiniCssExtractPlugin({
-        filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
-      }),
       new ForkTsCheckerWebpackPlugin(),
     ],
     optimization: {
       splitChunks: {
+        // chunks: 'all',
         cacheGroups: {
-          commons: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendor',
-            chunks: 'all',
-          },
-          manifest: {
-            name: 'manifest',
-          },
+          ...assembleCacheGroups(),
         },
       },
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        new CssMinimizerPlugin({
+          parallel: true,
+          minimizerOptions: {
+            preset: [
+              'default',
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
+          },
+        }),
+      ],
     },
     resolve: {
       modules: ['src', 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
+        App: path.resolve(__dirname, '../src/app/'),
+        Core: path.resolve(__dirname, '../src/core/'),
         Components: path.resolve(__dirname, '../src/components/'),
+        Hooks: path.resolve(__dirname, '../src/hooks/'),
         css: path.resolve(__dirname, '../src/css/'),
         util: path.resolve(__dirname, '../util'),
         Routes: path.resolve(__dirname, '../src/routes/'),
@@ -109,6 +156,12 @@ module.exports = (env) => {
         // to alias it for the production bundle
         // redux: require.resolve('redux'),
       },
+    },
+    stats: {
+      colors: true,
+      modules: true,
+      reasons: true,
+      errorDetails: true,
     },
   };
 

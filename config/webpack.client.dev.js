@@ -14,7 +14,6 @@
 
 const path = require('path');
 const paths = require('./paths');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -38,7 +37,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          // Creates `style` nodes from JS strings
+          // Creates `style` nodes from JS strings and injects them into the dev hot load module
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
@@ -49,7 +48,6 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
         use: ['@svgr/webpack'],
       },
     ],
@@ -57,26 +55,30 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
+      App: path.resolve(__dirname, '../src/app/'),
+      Core: path.resolve(__dirname, '../src/core/'),
       Components: path.resolve(__dirname, '../src/components/'),
+      Hooks: path.resolve(__dirname, '../src/hooks/'),
       css: path.resolve(__dirname, '../src/css/'),
       util: path.resolve(__dirname, '../util'),
       Routes: path.resolve(__dirname, '../src/routes/'),
     },
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appClientHtml,
     }),
   ],
   devServer: {
-    contentBase: paths.appClientPublic,
+    static: paths.appClientPublic,
     compress: true,
     hot: true,
     host: 'localhost',
     port: 3000,
-    publicPath: '/',
+    devMiddleware: {
+      publicPath: '/',
+    },
     historyApiFallback: true,
   },
 };

@@ -1,11 +1,15 @@
 .app {
+  width: 100%;
+}
+
+.content {
   margin: 0 auto;
   max-width: 1028px;
   width: 100%;
 }
 
 @media screen and (max-width: 1028px) {
-  .app {
+  .content {
     max-width: 979px;
   }
 }

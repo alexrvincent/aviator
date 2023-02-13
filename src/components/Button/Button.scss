@@ -1,0 +1,35 @@
+.btn {
+  padding: 12px;
+  transition: background-position 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-grad {
+  background-image: linear-gradient(to right, #da22ff 0%, #9733ee 51%, #da22ff 100%);
+  background-size: 200% auto;
+  color: white;
+  padding: 14px;
+  border: none;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: white;
+  box-shadow: 0 0 20px #9733ee;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: black;
+  text-decoration: none;
+}
