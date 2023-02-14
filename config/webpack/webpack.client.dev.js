@@ -13,7 +13,7 @@
 */
 
 const path = require('path');
-const paths = require('./paths');
+const paths = require('../paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -55,13 +55,14 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
-      App: path.resolve(__dirname, '../src/app/'),
-      Core: path.resolve(__dirname, '../src/core/'),
-      Components: path.resolve(__dirname, '../src/components/'),
-      Hooks: path.resolve(__dirname, '../src/hooks/'),
-      css: path.resolve(__dirname, '../src/css/'),
-      util: path.resolve(__dirname, '../util'),
-      Routes: path.resolve(__dirname, '../src/routes/'),
+      App: path.resolve(__dirname, '../../src/app/'),
+      Core: path.resolve(__dirname, '../../src/core/'),
+      Components: path.resolve(__dirname, '../../src/components/'),
+      Contexts: path.resolve(__dirname, '../../src/contexts/'),
+      Hooks: path.resolve(__dirname, '../../src/hooks/'),
+      css: path.resolve(__dirname, '../../src/css/'),
+      util: path.resolve(__dirname, '../../src/util'),
+      Routes: path.resolve(__dirname, '../../src/routes/'),
     },
   },
   plugins: [

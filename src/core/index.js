@@ -1,7 +1,7 @@
 // Top Level App Components
 import App from 'App/App';
 import Html from 'App/Html';
-import AppProvider from 'App/AppProvider';
+import Provider from 'Contexts/index';
 
 // Core Components
 import Link from 'Components/Link';
@@ -13,9 +13,9 @@ import NavBar from 'Components/NavBar';
 import Routes from 'Routes/index';
 
 // Core Util
-import { classNames } from 'util/index';
+import classNames from 'util/classNames';
 
 // Core CSS
 // import './index.scss';
 
-export { NavBar, Html, AppProvider, Routes, Link, App, PlaceholderText, Button, classNames };
+export { NavBar, Html, Provider, Routes, Link, App, PlaceholderText, Button, classNames };

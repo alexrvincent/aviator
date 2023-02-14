@@ -15,8 +15,8 @@
 */
 
 const path = require('path');
-const paths = require('./paths');
-const assembleCacheGroups = require('./codespliting');
+const paths = require('../paths');
+const assembleCacheGroups = require('../codespliting');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -144,13 +144,14 @@ module.exports = (env) => {
       modules: ['src', 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
-        App: path.resolve(__dirname, '../src/app/'),
-        Core: path.resolve(__dirname, '../src/core/'),
-        Components: path.resolve(__dirname, '../src/components/'),
-        Hooks: path.resolve(__dirname, '../src/hooks/'),
-        css: path.resolve(__dirname, '../src/css/'),
-        util: path.resolve(__dirname, '../util'),
-        Routes: path.resolve(__dirname, '../src/routes/'),
+        App: path.resolve(__dirname, '../../src/app/'),
+        Core: path.resolve(__dirname, '../../src/core/'),
+        Components: path.resolve(__dirname, '../../src/components/'),
+        Contexts: path.resolve(__dirname, '../../src/contexts/'),
+        Hooks: path.resolve(__dirname, '../../src/hooks/'),
+        css: path.resolve(__dirname, '../../src/css/'),
+        util: path.resolve(__dirname, '../../src/util'),
+        Routes: path.resolve(__dirname, '../../src/routes/'),
         // Webpack tree-shakes redux out because it's not used explicitly
         // in our main bundle. Redux-toolkit uses it as a dependency, so we'll need
         // to alias it for the production bundle

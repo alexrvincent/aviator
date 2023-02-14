@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'Components/Button';
-import Logo from './logo3.svg';
+import Logo from './assets/logo3.svg';
 import { Link, PlaceholderText } from 'Core/index';
 
 const NavBar: React.FC = () => {
