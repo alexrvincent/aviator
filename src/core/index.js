@@ -13,7 +13,7 @@ import NavBar from 'Components/NavBar';
 import Routes from 'Routes/index';
 
 // Core Util
-import classNames from 'util/classNames';
+import { classNames } from 'util/index';
 
 // Core CSS
 // import './index.scss';
