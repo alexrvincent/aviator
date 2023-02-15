@@ -1,10 +1,10 @@
 import React from 'react';
-import HelloWorld from 'Components/HelloWorld';
+import HelloFeatureItem from 'Features/HelloFeature/HelloFeatureItem';
 
 const HelloRoute: React.FC = (props) => {
   return (
     <div className="helloroute">
-      <HelloWorld text={'Hello Boilerplate!'} onHelloWorldClick={() => console.log('Hello Click!')} />
+      <HelloFeatureItem text={'Hello Boilerplate!'} onHelloFeatureClick={() => console.log('Hello Click!')} />
       {props.children}
     </div>
   );

@@ -51,8 +51,11 @@
       "App/*": ["src/app/*"],
       "Core/*": ["src/core/*"],
       "Components/*": ["src/components/*"],
+      "Features/*": ["src/features/*"],
+      "Contexts/*": ["src/contexts/*"],
       "Routes/*": ["src/routes/*"],
       "Hooks/*": ["src/hooks/*"],
+      "util/*": ["src/util/*"]
       // "@atoms": ["components/atoms/index"],
       // "@molecules": ["components/molecules/index"],
       // "@organisms": ["components/organisms/index"],
@@ -92,6 +95,6 @@
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true        /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["src/**/*", "util/global.d.ts", "util/classNames.ts"],  /* Specify which paths to include in the compilation */
+  "include": ["src/**/*", "src/util/global.d.ts", "src/util/classNames.ts"],  /* Specify which paths to include in the compilation */
   "exclude": ["node_modules", "node_modules/**/*", "src/index"], /* Specify which paths to exclude in the compilation */
 }

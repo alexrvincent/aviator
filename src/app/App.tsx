@@ -3,7 +3,11 @@ import { StaticRouter } from 'react-router-dom/server';
 import { BrowserRouter } from 'react-router-dom';
 
 /* Core JS */
-import { Html, AppProvider, NavBar, Routes, classNames } from 'Core/index';
+import Html from 'App/Html';
+import Provider from 'Contexts/index';
+import NavBar from 'Features/Core/NavBar';
+import Routes from 'Routes/index';
+import classNames from 'util/classNames';
 
 // @ts-ignore
 const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevServer = false }) => {
@@ -17,8 +21,8 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
   });
 
   // @ts-ignore
-  const ReactRouter = isServer ? StaticRouter : BrowserRouter;
-  /* Add top level app integrations here (Redux, Router, Internationalization), etc. For adding Contexts, see AppProvider.tsx */
+  const Router = isServer ? StaticRouter : BrowserRouter;
+  /* Add top level app integrations here (Redux, Router, Internationalization), etc. For adding Contexts, see contexts/index.js */
 
   return (
     /* @ts-ignore */
@@ -26,9 +30,9 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
       {/* @ts-ignore */}
       <Html assets={assets} title={title} isServer={isServer} isDevServer={isDevServer}>
         {/* @ts-ignore */}
-        <AppProvider isServer={isServer}>
+        <Provider isServer={isServer}>
           {/* @ts-ignore */}
-          <ReactRouter location={location}>
+          <Router location={location}>
             <div className={cls}>
               <NavBar />
               <div className={clsContent}>
@@ -37,8 +41,8 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
                 </Suspense>
               </div>
             </div>
-          </ReactRouter>
-        </AppProvider>
+          </Router>
+        </Provider>
       </Html>
     </React.StrictMode>
   );

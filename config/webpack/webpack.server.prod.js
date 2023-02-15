@@ -1,7 +1,7 @@
 /* 
-  The purpose of this file is to describe to webpack how to build a development version of your application that runs on a node server using express. 
+  The purpose of this file is to describe to webpack how to build a production version of your application that runs on a node server using express. 
 
-  Everything you see here is parsed, bundled, and exported by webpack, but is served using an express.js server using parameters we specify. The result of this is to build *and* run a development web server.
+  Everything you see here is parsed, bundled, and exported by webpack, but is served using an express.js server using parameters we specify. The result of this is to build *and* run a production web server.
 
   1. Starting at paths.appServer (server/index.js) webpack will traverse the dependencies in an attempt to build all the files in the app. 
   2. It uses the module rules specified (and their supplied loaders) to figure out how to process a given file type.
@@ -13,18 +13,17 @@
 */
 
 const path = require('path');
-const paths = require('./paths');
+const paths = require('../paths');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   target: 'node',
   cache: false,
   entry: paths.appServer,
   output: {
     path: paths.appDist,
     filename: 'server.js',
-    publicPath: '/',
   },
   externals: {
     express: 'require("express")',
@@ -67,18 +66,21 @@ module.exports = {
     modules: ['src', 'node_modules'],
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
-      App: path.resolve(__dirname, '../src/app/'),
-      Core: path.resolve(__dirname, '../src/core/'),
-      Components: path.resolve(__dirname, '../src/components/'),
-      Hooks: path.resolve(__dirname, '../src/hooks/'),
-      css: path.resolve(__dirname, '../src/css/'),
-      util: path.resolve(__dirname, '../util'),
-      Routes: path.resolve(__dirname, '../src/routes/'),
+      App: path.resolve(__dirname, '../../src/app/'),
+      Core: path.resolve(__dirname, '../../src/core/'),
+      Components: path.resolve(__dirname, '../../src/components/'),
+      Contexts: path.resolve(__dirname, '../../src/contexts/'),
+      Features: path.resolve(__dirname, '../../src/features/'),
+      Hooks: path.resolve(__dirname, '../../src/hooks/'),
+      css: path.resolve(__dirname, '../../src/css/'),
+      util: path.resolve(__dirname, '../../src/util'),
+      Routes: path.resolve(__dirname, '../../src/routes/'),
     },
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.LoaderOptionsPlugin({ debug: true })],
-  watchOptions: {
-    aggregateTimeout: 200,
-    poll: 1000,
-  },
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    }),
+  ],
 };

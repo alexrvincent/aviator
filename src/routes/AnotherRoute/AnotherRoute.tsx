@@ -1,12 +1,16 @@
 // @ts-nocheck
-import React from 'react';
-import { Link } from 'Core/index';
+import React, { lazy, Suspense } from 'react';
+const AnotherFeatureItem = lazy(
+  () => import(/* webpackChunkName: "features.another" */ 'Features/AnotherFeature/AnotherFeatureItem'),
+);
+// import AnotherFeatureItem from 'Features/AnotherFeature/AnotherFeatureItem';
 
-const AnotherRoute: React.FC = (props) => {
+const AnotherRoute: React.FC = () => {
   return (
     <div className="anotherroute">
-      <Link to="/">{'To Home Page'}</Link>
-      {props.children}
+      <Suspense fallback={<>Feature Loading...</>}>
+        <AnotherFeatureItem />
+      </Suspense>
     </div>
   );
 };

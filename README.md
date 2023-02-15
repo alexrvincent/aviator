@@ -39,14 +39,13 @@ Alex Vincent's personal living boilerplate for production-grade hybrid React app
 
 # TO-DOs (In Order):
 
-1. Add code splitting for custom code modules, routes, css
-2. Add Figma / Storybook Support
-3. Add an API library (React Query)
-4. Add an automated testing framework support (Cypress / Playwright)
-5. Set up NGINX
-6. Set up Dockerfile
-7. Manually deploy to Heroku
-8. Automate deployments using CircleCI
+1. Add Figma / Storybook Support
+2. Add an API library (React Query)
+3. Add an automated testing framework support (Cypress / Playwright)
+4. Set up NGINX
+5. Set up Dockerfile
+6. Manually deploy to Heroku
+7. Automate deployments using CircleCI
 
 # TO-DOs to Come Back To
 
