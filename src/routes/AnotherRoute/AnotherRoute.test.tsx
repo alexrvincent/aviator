@@ -7,6 +7,6 @@ describe('<AnotherRoute />', () => {
   it('should render the Route normally', () => {
     const props = { children: ['AnotherRoute'] };
     render(<AnotherRoute {...props} />, { wrapper: BrowserRouter });
-    expect(screen.getByText('AnotherRoute')).toBeInTheDocument;
+    expect(screen.getByText('To Home Page')).toBeInTheDocument;
   });
 });

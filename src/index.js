@@ -1,8 +1,8 @@
 import React from 'react';
 // @ts-ignore
 import { hydrateRoot, createRoot } from 'react-dom/client';
-import { App } from 'Core/index';
-import 'Core/index.scss';
+import App from 'App/App';
+import 'css/core.scss';
 
 // @ts-ignore
 if (module && module.hot) {

@@ -51,6 +51,7 @@
       "App/*": ["src/app/*"],
       "Core/*": ["src/core/*"],
       "Components/*": ["src/components/*"],
+      "Features/*": ["src/features/*"],
       "Contexts/*": ["src/contexts/*"],
       "Routes/*": ["src/routes/*"],
       "Hooks/*": ["src/hooks/*"],

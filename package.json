@@ -37,7 +37,9 @@
     "clean-and-install": "yarn clean && yarn install --production=false",
     "gc": "node ./scripts/generateComponent.js",
     "gr": "node ./scripts/generateRoute.js",
-    "gh": "node ./scripts/generateHook.js"
+    "gh": "node ./scripts/generateHook.js",
+    "gf": "node ./scripts/generateFeature.js",
+    "gfc": "node ./scripts/generateFeatureComponent.js"
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [

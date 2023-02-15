@@ -70,6 +70,7 @@ module.exports = {
       Core: path.resolve(__dirname, '../../src/core/'),
       Components: path.resolve(__dirname, '../../src/components/'),
       Contexts: path.resolve(__dirname, '../../src/contexts/'),
+      Features: path.resolve(__dirname, '../../src/features/'),
       Hooks: path.resolve(__dirname, '../../src/hooks/'),
       css: path.resolve(__dirname, '../../src/css/'),
       util: path.resolve(__dirname, '../../src/util'),

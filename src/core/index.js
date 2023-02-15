@@ -7,7 +7,9 @@ import Provider from 'Contexts/index';
 import Link from 'Components/Link';
 import Button from 'Components/Button';
 import PlaceholderText from 'Components/PlaceholderText';
-import NavBar from 'Components/NavBar';
+
+// Core Features
+import NavBar from 'Features/Core/NavBar';
 
 // Routes
 import Routes from 'Routes/index';
