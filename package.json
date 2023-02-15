@@ -27,6 +27,9 @@
     "build-client": "webpack --config config/webpack/webpack.client.prod.js --profile --color --json=dist/static/build-stats.json",
     "analyze-client": "webpack --config config/webpack/webpack.client.prod.js --env analyze=true",
     "weigh-client": "node ./scripts/checkBundleSize.js",
+    "--STORYBOOK--": "",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "--SERVER--": "",
     "dev-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --watch --color --config config/webpack/webpack.server.dev.js' 'just-wait -t 300 --pattern \"dist/static\" && nodemon ./dist/server.js' ",
     "build-server": "yarn clean-and-install && concurrently 'yarn build-client' 'webpack --color --config config/webpack/webpack.server.prod.js --stats verbose'",
@@ -40,6 +43,7 @@
     "gh": "node ./scripts/generateHook.js",
     "gf": "node ./scripts/generateFeature.js",
     "gfc": "node ./scripts/generateFeatureComponent.js"
+
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [
@@ -81,6 +85,14 @@
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
     "@babel/preset-typescript": "^7.13.0",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@svgr/webpack": "^6.2.1",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^13.4.0",

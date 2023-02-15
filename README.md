@@ -39,7 +39,7 @@ Alex Vincent's personal living boilerplate for production-grade hybrid React app
 
 # TO-DOs (In Order):
 
-1. Add Figma / Storybook Support
+1. Add Figma / Storybook Support (npx storybook@next automigrate for full migration)
 2. Add an API library (React Query)
 3. Add an automated testing framework support (Cypress / Playwright)
 4. Set up NGINX
