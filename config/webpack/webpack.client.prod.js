@@ -37,7 +37,7 @@ module.exports = (env) => {
     output: {
       path: paths.appDist,
       filename: 'static/js/[name].[contenthash:8].js',
-      chunkFilename: 'static/js/features.[name].[contenthash:8].js',
+      chunkFilename: 'static/js/[name].[contenthash:8].js',
     },
     module: {
       rules: [
@@ -90,7 +90,7 @@ module.exports = (env) => {
       }),
       new MiniCssExtractPlugin({
         filename: 'static/css/[name].[contenthash:8].css',
-        chunkFilename: 'static/css/features.[name].[contenthash:8].css',
+        chunkFilename: 'static/css/[name].[contenthash:8].css',
       }),
       new HtmlWebpackPlugin({
         inject: true,

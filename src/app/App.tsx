@@ -3,7 +3,6 @@ import { StaticRouter } from 'react-router-dom/server';
 import { BrowserRouter } from 'react-router-dom';
 
 /* Core JS */
-// import { Html, Provider, NavBar, Routes, classNames } from 'Core/index';
 import Html from 'App/Html';
 import Provider from 'Contexts/index';
 import NavBar from 'Features/Core/NavBar';

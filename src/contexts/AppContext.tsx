@@ -9,8 +9,6 @@ export const AppProvider: React.FC = ({ isServer, children }) => {
     isServer,
   };
 
-  console.log(isServer);
-
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

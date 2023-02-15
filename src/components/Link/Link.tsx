@@ -4,16 +4,18 @@ import { useNavigate } from 'react-router-dom';
 interface LinkProps {
   to: string;
 }
-
-const Link: FC<LinkProps> = ({ children, to }) => {
+// @ts-ignore
+const Link: FC<LinkProps> = ({ children, to, linkProps }) => {
   const navigate = useNavigate();
 
-  const cb = () => {
+  // @ts-ignore
+  const cb = (e) => {
+    e.preventDefault();
     navigate(to);
   };
 
   return (
-    <a className="link" onClick={cb}>
+    <a href={to} className="link" onClick={cb} {...linkProps}>
       {children}
     </a>
   );

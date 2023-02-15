@@ -5,19 +5,23 @@ import Link from 'Components/Link';
 import PlaceholderText from 'Components/PlaceholderText';
 
 const NavBar: React.FC = () => {
+  const linkProps = {
+    'aria-label': 'Main Navigation Icon',
+  };
+
   return (
     <header className="navbar">
       <div className="navbarLogo">
         {/* @ts-ignore */}
-        <Link to="/">
-          <Logo />
+        <Link to="/" linkProps={linkProps}>
+          <Logo alt="Main navigation icon" />
         </Link>
       </div>
 
       <nav className="navbarLinks">
         <PlaceholderText>
           {/* @ts-ignore */}
-          <Link to="/another-route">{'Another Route'}</Link>
+          <Link to="/another">{'Another Route'}</Link>
         </PlaceholderText>
 
         <PlaceholderText>
