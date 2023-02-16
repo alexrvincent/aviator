@@ -9,6 +9,7 @@ import express from 'express';
 import expressStaticGzip from 'express-static-gzip';
 
 import serverSideRender from './serverSideRender';
+import logError from './logError';
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -77,12 +78,17 @@ app.get(routes.public.default, (req, res) => {
   try {
     serverSideRender(req.url, res);
   } catch (e) {
-    if (e instanceof Error) {
-      console.error(e.message, e.stack);
-    } else {
-      console.error('Error:', e);
-    }
-    return res.end(e.message);
+    // If the server cannot server side render, send the backup client build and let the client render everything
+    logError('app.get(*)', e);
+    res.statusCode = 500;
+    const options = { root: 'dist' };
+    res.sendFile('app.html', options, function (e) {
+      if (e) {
+        logError('app.get(*), sendFile()', e);
+        res.writeHead(500);
+        res.end();
+      }
+    });
   }
 });
 

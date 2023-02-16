@@ -18,7 +18,9 @@ const Html: React.FC = (props) => {
           name="description"
           content="Alex Vincent's personal living boilerplate for production-grade hybrid React apps."
         ></meta>
-        <link rel="stylesheet" href={assets.css[0]} />
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        {assets && assets.css && assets.css.length && <link rel="stylesheet" href={assets.css[0]} />}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -27,16 +29,6 @@ const Html: React.FC = (props) => {
       </head>
       <body>
         <div id="root">{children}</div>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `assetManifest = ${JSON.stringify(assets)};`,
-          }}
-        />
-        {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `window.__SERVER_STATE = ${serverState})`,
-          }}
-        /> */}
       </body>
     </html>
   );
