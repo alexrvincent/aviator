@@ -10,16 +10,16 @@ module.exports = {
   budgets: {
     assets: [
       {
-        assetPath: `static/js/app.*.js`,
+        assetPath: `static/js/core.*.js`,
         maxSize: 13000,
       },
       {
-        assetPath: `static/js/app.*.js.gz`,
+        assetPath: `static/js/core.*.js.gz`,
         maxSize: 5000,
       },
       {
-        assetPath: `static/js/app.*.js.br`,
-        maxSize: 4000,
+        assetPath: `static/js/core.*.js.br`,
+        maxSize: 5000,
       },
       {
         assetPath: `static/js/vendor.*.js`,
@@ -34,12 +34,20 @@ module.exports = {
         maxSize: 60000,
       },
       {
-        assetPath: `static/css/app.*.css`,
+        assetPath: `static/css/core.*.css`,
         maxSize: 6000,
       },
       {
-        assetPath: `static/css/core.*.css`,
-        maxSize: 6000,
+        assetPath: `static/js/routes.another.*.js`,
+        maxSize: 13000,
+      },
+      {
+        assetPath: `static/js/routes.hello.*.js`,
+        maxSize: 13000,
+      },
+      {
+        assetPath: `static/js/features.another.*.js`,
+        maxSize: 13000,
       },
     ],
   },

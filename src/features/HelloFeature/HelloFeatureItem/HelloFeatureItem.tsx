@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from 'util/index';
+import classNames from 'utils/classNames';
 
 // Use an interface for public API definitions or when authoring a 3rd part api
 // interface Props {

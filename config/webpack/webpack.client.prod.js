@@ -145,13 +145,14 @@ module.exports = (env) => {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
       alias: {
         App: path.resolve(__dirname, '../../src/app/'),
+        Assets: path.resolve(__dirname, '../../src/assets/'),
         Core: path.resolve(__dirname, '../../src/core/'),
         Components: path.resolve(__dirname, '../../src/components/'),
         Contexts: path.resolve(__dirname, '../../src/contexts/'),
         Features: path.resolve(__dirname, '../../src/features/'),
         Hooks: path.resolve(__dirname, '../../src/hooks/'),
         css: path.resolve(__dirname, '../../src/css/'),
-        util: path.resolve(__dirname, '../../src/util'),
+        utils: path.resolve(__dirname, '../../src/utils'),
         Routes: path.resolve(__dirname, '../../src/routes/'),
         // Webpack tree-shakes redux out because it's not used explicitly
         // in our main bundle. Redux-toolkit uses it as a dependency, so we'll need

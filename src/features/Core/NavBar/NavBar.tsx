@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'Components/Button';
-import Logo from './assets/logo3.svg';
+import Logo from 'Assets/logo3.svg';
 import Link from 'Components/Link';
 import PlaceholderText from 'Components/PlaceholderText';
 

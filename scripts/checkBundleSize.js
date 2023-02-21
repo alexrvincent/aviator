@@ -69,10 +69,12 @@ const checkBundleSize = function () {
   }
 
   if (results.length) {
+    results.sort((a, b) => a.localeCompare(b));
     console.log(results);
   }
 
   if (errors.length) {
+    errors.sort((a, b) => a.localeCompare(b));
     console.log(errors);
 
     // TO-DO: Alert CI / Github that bundle size has failed
