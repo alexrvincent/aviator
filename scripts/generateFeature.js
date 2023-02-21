@@ -74,6 +74,19 @@ const generateFeature = (name, component) => {
         },
       );
 
+      // F. Generate a storybook story in the new folder
+      fs.closeSync(fs.openSync(`${filePath}/${name}/${component}/${component}.stories.tsx`, 'w'));
+      fs.writeFile(
+        `${filePath}/${name}/${component}/${component}.stories.tsx`,
+        `import { Meta } from '@storybook/react';\n\nimport ${component} from './${component}';\nimport './${component}.scss';\n\nexport default {\n  component: ${component},\n  argTypes: {\n    children: { control: 'text' },\n  },\n} as Meta;\n\nexport const Primary = {\n  args: {\n    children: 'children',\n  },\n};\n`,
+        'utf-8',
+        (e) => {
+          if (e) {
+            console.log('\x1b[31m', `❌ Error: ${e}`);
+          }
+        },
+      );
+
       console.log(
         '\x1b[32m',
         `✔️  Done! Your Feature Component '${component}' is now available under src/Features/${name}/${component}.`,
