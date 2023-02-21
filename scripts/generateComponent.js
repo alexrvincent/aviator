@@ -67,6 +67,19 @@ const generateComponent = (name) => {
       },
     );
 
+    // F. Generate a storybook story in the new folder
+    fs.closeSync(fs.openSync(`${filePath}/${name}/${name}.stories.tsx`, 'w'));
+    fs.writeFile(
+      `${filePath}/${name}/${name}.stories.tsx`,
+      `import { Meta } from '@storybook/react';\n\nimport ${name} from './${name}';\nimport './${name}.scss';\n\nexport default {\n  component: ${name},\n  argTypes: {\n    children: { control: 'text' },\n  },\n} as Meta;\n\nexport const Primary = {\n  args: {\n    children: 'children',\n  },\n};\n`,
+      'utf-8',
+      (e) => {
+        if (e) {
+          console.log('\x1b[31m', `❌ Error: ${e}`);
+        }
+      },
+    );
+
     console.log('\x1b[32m', `✔️  Done! Your component '${name}' is now available under src/components/${name}.`);
 
     // If the folder exists, error out
