@@ -6,43 +6,40 @@
 import path from 'path';
 import fs from 'fs';
 import express from 'express';
-import React from 'react';
-import { renderToPipeableStream } from 'react-dom/server';
-import App from '../src/app/index';
 import expressStaticGzip from 'express-static-gzip';
+
+import serverSideRender from './serverSideRender';
+import logError from './logError';
 
 const app = express();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
-const BUILD_STATS = path.join(__dirname, 'dist', 'static', 'build-stats.json');
 
-/* Step 1: Define all the routes our express server should be able to resolve */
+/* Step 1: Define all possible routes our express server can serve */
 const routes = {
-  status: '/status',
-  robots: '/robots.txt',
-  default: '*',
+  static: {
+    public: path.join(__dirname, 'server', 'public'),
+    robots: path.join(__dirname, 'server', 'public', 'robots.txt'),
+    js: path.join(__dirname, 'dist', 'static', 'js'),
+    css: path.join(__dirname, 'dist', 'static', 'css'),
+  },
+  public: {
+    default: '*',
+    status: '/status',
+    robots: '/robots.txt',
+    js: '/static/js/',
+    css: '/static/css/',
+  },
 };
 
-/* Step 2: Define any static files we want express to serve from its local directory */
-// const DIST_DIR = path.join(__dirname, 'dist');
-const STATIC_JS_DIR = path.join(__dirname, 'dist', 'static', 'js');
-const STATIC_CSS_DIR = path.join(__dirname, 'dist', 'static', 'css');
-const PUBLIC_DIR = path.join(__dirname, 'server', 'public');
+/* Step 2: Map public routes to all static routes to serve static content (js, css, SEO related files */
+// '/' - public folder for icons, manifest, and other SEO related files.
+app.use(express.static(routes.static.public));
 
-app.use(express.static(PUBLIC_DIR));
+// '/static/js' - where all of our app JavaScript chunks come from.
 app.use(
-  '/static/js/',
-  expressStaticGzip(STATIC_JS_DIR, {
-    enableBrotli: true,
-    orderPreference: ['br', 'gz'],
-    setHeaders: function (res) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000');
-    },
-  }),
-);
-app.use(
-  '/static/css/',
-  expressStaticGzip(STATIC_CSS_DIR, {
+  routes.public.js,
+  expressStaticGzip(routes.static.js, {
     enableBrotli: true,
     orderPreference: ['br', 'gz'],
     setHeaders: function (res) {
@@ -51,51 +48,51 @@ app.use(
   }),
 );
 
-// app.set('views', path.join(__dirname, 'public'));
-// app.set('view engine', 'html');
-// app.engine('html', ejs.renderFile);
+// '/static/css' - where all of our app CSS chunks come from.
+app.use(
+  routes.public.css,
+  expressStaticGzip(routes.static.css, {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+    setHeaders: function (res) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    },
+  }),
+);
 
-/* Step 3: Define route to response mapping here */
+/* Step 3: Map our public routes to a dynamic server response */
 // '/status' - server health check
-app.get(routes.status, (req, res) => {
+app.get(routes.public.status, (req, res) => {
+  res.statusCode = 200;
   res.send('Status OK');
 });
 
-app.get(routes.robots, (req, res) => {
-  const ROBOTS_TXT = path.join(__dirname, 'server', 'public', 'robots.txt');
-  const robotsTxt = fs.readFileSync(ROBOTS_TXT);
+// '/robots.txt' - serve robots.txt file to SEO and crawlers
+app.get(routes.public.robots, (req, res) => {
+  const robotsTxt = fs.readFileSync(routes.static.robots);
   res.send(robotsTxt);
 });
 
-// Any route not matching the ones listed above
-app.get(routes.default, (req, res) => {
-  // Step 1: Create the context for the server-side rendered app from the express request
+// "*" - all other routes default to React. This is where server side rendering occurs.
+app.get(routes.public.default, (req, res) => {
   try {
-    // const staticRouterProps = {
-    //   location: req.url,
-    //   context: {
-    //     host: req.headers.host,
-    //     path: req.path,
-    //     query: req.query,
-    //     url: req.url,
-    //   },
-    // };
-
-    render(req.url, res);
-
-    // And send it to the client
-    // return res.send(fullPayload);
+    serverSideRender(req.url, res);
   } catch (e) {
-    if (e instanceof Error) {
-      console.error(e.message, e.stack);
-    } else {
-      console.error('Error:', e);
-    }
-    return res.end(e.message);
+    // If the server cannot server side render, send the backup client build and let the client render everything
+    logError('app.get(*)', e);
+    res.statusCode = 500;
+    const options = { root: 'dist' };
+    res.sendFile('app.html', options, function (e) {
+      if (e) {
+        logError('app.get(*), sendFile()', e);
+        res.writeHead(500);
+        res.end();
+      }
+    });
   }
 });
 
-/* Step 3: Start the server */
+/* Step 4: Start the express server */
 app
   .listen(8000, '127.0.0.1', () => {
     console.log(`Running 'aviator' at http://localhost:${port} ...`);
@@ -110,93 +107,10 @@ app
       case 'EACCES':
         console.error(bind + ' requires elevated privileges');
         process.exit(1);
-        break;
       case 'EADDRINUSE':
         console.error(bind + ' is already in use');
         process.exit(1);
-        break;
       default:
         throw error;
     }
   });
-
-function render(url, res) {
-  // Stream
-  res.socket.on('error', (error) => {
-    console.error('Fatal', error);
-  });
-
-  let buildStats = fs.readFileSync(BUILD_STATS);
-  buildStats = JSON.parse(buildStats);
-  let js = [];
-  let css = [];
-  let assets = {
-    js,
-    css,
-  };
-  Object.values(buildStats.assetsByChunkName).forEach((chunk) => {
-    let onlyJavaScript = chunk.filter(
-      (asset) => asset.endsWith('.js') && (asset.startsWith('static/js/core') || asset.startsWith('static/js/vendor')),
-    );
-    let onlyCSS = chunk.filter((asset) => asset.endsWith('.css') && asset.startsWith('static/css/core'));
-    js.push(...onlyJavaScript);
-    css.push(...onlyCSS);
-  });
-
-  // 3. Inject the client script (webpack needs to do this)
-  // let state = {
-  //   myState: 'isServer',
-  // };
-
-  let documentTitle = 'Aviator Server Build';
-
-  const stream = renderToPipeableStream(<App assets={assets} location={url} title={documentTitle} isServer />, {
-    // identifierPrefix?: string,
-    // namespaceURI?: string,
-    // nonce?: string,
-    // bootstrapScriptContent?: string,
-    // bootstrapScripts?: Array<string>,
-    // bootstrapModules?: Array<string>,
-    // progressiveChunkSize?: number,
-    // onShellReady?: () => void,
-    // onShellError?: () => void,
-    // onAllReady?: () => void,
-    // onError?: (error: mixed) => void,
-    bootstrapScripts: js,
-    onShellError() {
-      // Something errored before we could complete the shell so we emit an alternative shell.
-      res.statusCode = 500;
-      res.send('<!doctype html><p>Loading...</p><script src="clientrender.js"></script>');
-    },
-    onShellReady() {
-      // If something errored before we started streaming, we set the error code appropriately.
-      res.setHeader('Content-type', 'text/html');
-      stream.pipe(res);
-    },
-    onError(x) {
-      console.error(x);
-    },
-  });
-}
-
-// function handleErrors(fn) {
-//   return async function (req, res, next) {
-//     try {
-//       return await fn(req, res);
-//     } catch (x) {
-//       next(x);
-//     }
-//   };
-// }
-
-// async function waitForWebpack() {
-//   while (true) {
-//     try {
-//       readFileSync(path.resolve(__dirname, '../dist/static/build-stats.json'));
-//       return;
-//     } catch (err) {
-//       console.log('Could not find webpack build output. Will retry in a second...');
-//       await new Promise((resolve) => setTimeout(resolve, 1000));
-//     }
-//   }
-// }
