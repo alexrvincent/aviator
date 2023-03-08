@@ -38,6 +38,8 @@ module.exports = {
     'Routes/(.*)$': '<rootDir>/src/routes/$1',
     'Hooks/(.*)$': '<rootDir>/src/hooks/$1',
     'utils/(.*)$': '<rootDir>/src/utils/$1',
+    'Services/(.*)$': '<rootDir>/src/services/$1',
+    'test/(.*)$': '<rootDir>/src/test/$1',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\](?!react-children-utilities).+\\.(js|jsx|ts|tsx)$',

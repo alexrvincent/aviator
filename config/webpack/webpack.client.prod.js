@@ -154,6 +154,8 @@ module.exports = (env) => {
         css: path.resolve(__dirname, '../../src/css/'),
         utils: path.resolve(__dirname, '../../src/utils'),
         Routes: path.resolve(__dirname, '../../src/routes/'),
+        Services: path.resolve(__dirname, '../../src/services/'),
+        test: path.resolve(__dirname, '../../src/test/'),
         // Webpack tree-shakes redux out because it's not used explicitly
         // in our main bundle. Redux-toolkit uses it as a dependency, so we'll need
         // to alias it for the production bundle

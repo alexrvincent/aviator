@@ -55,8 +55,10 @@
       "Features/*": ["src/features/*"],
       "Contexts/*": ["src/contexts/*"],
       "Routes/*": ["src/routes/*"],
+      "Services/*": ["src/services/*"],
       "Hooks/*": ["src/hooks/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "test/*": ["src/test/*"],
       // "@atoms": ["components/atoms/index"],
       // "@molecules": ["components/molecules/index"],
       // "@organisms": ["components/organisms/index"],

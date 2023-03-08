@@ -65,6 +65,8 @@ module.exports = {
       css: path.resolve(__dirname, '../../src/css/'),
       utils: path.resolve(__dirname, '../../src/utils'),
       Routes: path.resolve(__dirname, '../../src/routes/'),
+      Services: path.resolve(__dirname, '../../src/services/'),
+      test: path.resolve(__dirname, '../../src/test/'),
     },
   },
   plugins: [

@@ -26,10 +26,10 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
 
   return (
     /* @ts-ignore */
-    <div className={cls}>
-      <React.StrictMode>
-        {/* @ts-ignore */}
-        <Html assets={assets} title={title} isServer={isServer} isDevServer={isDevServer}>
+    <React.StrictMode>
+      {/* @ts-ignore */}
+      <Html assets={assets} title={title} isServer={isServer} isDevServer={isDevServer}>
+        <div className={cls}>
           {/* @ts-ignore */}
           <Provider isServer={isServer}>
             {/* @ts-ignore */}
@@ -42,9 +42,9 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
               </div>
             </Router>
           </Provider>
-        </Html>
-      </React.StrictMode>
-    </div>
+        </div>
+      </Html>
+    </React.StrictMode>
   );
 };
 
