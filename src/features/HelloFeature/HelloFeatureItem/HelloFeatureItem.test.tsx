@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import HelloFeatureItem from './HelloFeatureItem';
+import { render } from 'test/renderWithQuery';
 
 describe('<HelloFeatureItem />', () => {
   it('should render the Component normally', () => {
@@ -14,7 +15,7 @@ describe('<HelloFeatureItem />', () => {
     expect(screen.getByText(props.text)).toBeInTheDocument;
   });
 
-  it('should render the text on the paragraph field passed as the text prop', () => {
+  it('should render the text on the div field passed as the text prop', () => {
     const props = {
       text: 'Write a Hello Unit Test',
       onHelloFeatureClick: () => {
@@ -25,6 +26,6 @@ describe('<HelloFeatureItem />', () => {
     render(<HelloFeatureItem {...props} />);
 
     expect(screen.getByText(props.text)).toBeInTheDocument;
-    expect(screen.getByText(props.text).tagName).toBe('P');
+    expect(screen.getByText(props.text).tagName).toBe('DIV');
   });
 });

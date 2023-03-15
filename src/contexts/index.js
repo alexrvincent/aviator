@@ -2,6 +2,7 @@
 import React from 'react';
 import { AppProvider } from 'Contexts/AppContext';
 import { FontProvider } from 'Contexts/FontContext';
+import { QueryProvider } from 'Contexts/QueryContext';
 
 // A centralized place for all Context/Providers to live and be exported.
 
@@ -23,9 +24,14 @@ import { FontProvider } from 'Contexts/FontContext';
 const Provider = ({ isServer, children }) => {
   return (
     <>
-      <AppProvider isServer={isServer}>
-        <FontProvider>{children}</FontProvider>
-      </AppProvider>
+      {/* Enables the use of react-query anywhere in the application */}
+      <QueryProvider>
+        {/* A global state context for the general state of the application */}
+        <AppProvider isServer={isServer}>
+          {/* Tells the app whether the primary font for the app has loaded */}
+          <FontProvider>{children}</FontProvider>
+        </AppProvider>
+      </QueryProvider>
     </>
   );
 };

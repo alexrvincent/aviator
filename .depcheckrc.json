@@ -1,5 +1,6 @@
 {
   "ignores": [
+    "axios",
     "just-wait",
     "@babel/cli",
     "@babel/preset-typescript",

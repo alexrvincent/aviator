@@ -39,13 +39,12 @@ Alex Vincent's personal living boilerplate for production-grade hybrid React app
 
 # TO-DOs (In Order):
 
-1. Add Figma / Storybook Support (npx storybook@next automigrate for full migration)
-2. Add an API library (React Query)
-3. Add an automated testing framework support (Cypress / Playwright)
-4. Set up NGINX
-5. Set up Dockerfile
-6. Manually deploy to Heroku
-7. Automate deployments using CircleCI
+1. Add an API library (React Query)
+2. Add an automated testing framework support (Cypress / Playwright)
+3. Set up NGINX
+4. Set up Dockerfile
+5. Manually deploy to Heroku
+6. Automate deployments using CircleCI
 
 # TO-DOs to Come Back To
 

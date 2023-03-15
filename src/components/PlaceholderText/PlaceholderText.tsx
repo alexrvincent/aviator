@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames } from 'util/index';
+import classNames from 'utils/classNames';
 import Children from 'react-children-utilities';
 import useFontContext from 'Hooks/useFontContext';
 

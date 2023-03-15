@@ -49,13 +49,16 @@
       // "@styles": ["styles/index"],
       // "@fonts": ["fonts/index"],
       "App/*": ["src/app/*"],
+      "Assets/*": ["src/assets/*"],
       "Core/*": ["src/core/*"],
       "Components/*": ["src/components/*"],
       "Features/*": ["src/features/*"],
       "Contexts/*": ["src/contexts/*"],
       "Routes/*": ["src/routes/*"],
+      "Services/*": ["src/services/*"],
       "Hooks/*": ["src/hooks/*"],
-      "util/*": ["src/util/*"]
+      "utils/*": ["src/utils/*"],
+      "test/*": ["src/test/*"],
       // "@atoms": ["components/atoms/index"],
       // "@molecules": ["components/molecules/index"],
       // "@organisms": ["components/organisms/index"],
@@ -95,6 +98,6 @@
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true        /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": ["src/**/*", "src/util/global.d.ts", "src/util/classNames.ts"],  /* Specify which paths to include in the compilation */
+  "include": ["src/**/*", "src/utils/global.d.ts", "src/utils/classNames.ts"],  /* Specify which paths to include in the compilation */
   "exclude": ["node_modules", "node_modules/**/*", "src/index"], /* Specify which paths to exclude in the compilation */
 }

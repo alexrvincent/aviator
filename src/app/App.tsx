@@ -3,11 +3,11 @@ import { StaticRouter } from 'react-router-dom/server';
 import { BrowserRouter } from 'react-router-dom';
 
 /* Core JS */
-import Html from 'App/Html';
+import Html from 'Features/Core/Html';
 import Provider from 'Contexts/index';
 import NavBar from 'Features/Core/NavBar';
 import Routes from 'Routes/index';
-import classNames from 'util/classNames';
+import classNames from 'utils/classNames';
 
 // @ts-ignore
 const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevServer = false }) => {
@@ -29,20 +29,20 @@ const App: React.FC = ({ assets = {}, location, title, isServer = false, isDevSe
     <React.StrictMode>
       {/* @ts-ignore */}
       <Html assets={assets} title={title} isServer={isServer} isDevServer={isDevServer}>
-        {/* @ts-ignore */}
-        <Provider isServer={isServer}>
+        <div className={cls}>
           {/* @ts-ignore */}
-          <Router location={location}>
-            <div className={cls}>
+          <Provider isServer={isServer}>
+            {/* @ts-ignore */}
+            <Router location={location}>
               <NavBar />
               <div className={clsContent}>
                 <Suspense fallback={<div> LOADING </div>}>
                   <Routes />
                 </Suspense>
               </div>
-            </div>
-          </Router>
-        </Provider>
+            </Router>
+          </Provider>
+        </div>
       </Html>
     </React.StrictMode>
   );
