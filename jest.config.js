@@ -46,7 +46,7 @@ module.exports = {
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   // Tells Jest what folders to ignore for tests
-  testPathIgnorePatterns: [`node_modules`, `\\.cache`],
+  testPathIgnorePatterns: [`node_modules`, `\\.cache`, 'playwright'],
   testURL: `http://localhost`,
   testEnvironment: 'jsdom',
 };
