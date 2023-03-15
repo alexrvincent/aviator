@@ -124,3 +124,6 @@ npm-debug.log
 yarn-error.log*
 .vscode
 /img/
+/test-results/
+/playwright-report/
+/playwright/.cache/
