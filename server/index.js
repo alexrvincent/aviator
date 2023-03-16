@@ -94,7 +94,7 @@ app.get(routes.public.default, (req, res) => {
 
 /* Step 4: Start the express server */
 app
-  .listen(8000, '127.0.0.1', () => {
+  .listen(port, () => {
     console.log(`Running 'aviator' at http://localhost:${port} ...`);
   })
   .on('error', function (error) {
