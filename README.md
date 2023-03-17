@@ -39,12 +39,8 @@ Alex Vincent's personal living boilerplate for production-grade hybrid React app
 
 # TO-DOs (In Order):
 
-1. Add an API library (React Query)
-2. Add an automated testing framework support (Cypress / Playwright)
-3. Set up NGINX
-4. Set up Dockerfile
-5. Manually deploy to Heroku
-6. Automate deployments using CircleCI
+2. Manually deploy to Heroku
+3. Automate deployments using CircleCI
 
 # TO-DOs to Come Back To
 

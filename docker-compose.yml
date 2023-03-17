@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   node:
+    image: aviator-node
     build:
       context: ./
     command: yarn start
@@ -8,3 +9,11 @@ services:
       - "8000:8000"
     environment:
       NODE_ENV: production
+  nginx:
+    image: aviator-nginx
+    build:
+      context: ./nginx
+    command: nginx -g "daemon off;"
+    ports:
+      - "8080:80"
+
